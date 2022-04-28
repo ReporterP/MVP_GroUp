@@ -1,2 +1,2 @@
 # MVP_GroUp
-MVP version application GroUp
+MVP application GroUp
