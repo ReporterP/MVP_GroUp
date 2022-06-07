@@ -1,2 +1,2 @@
-server: python ./server/server.py
+web: gunicorn app:./server/server
 bot: python ./bot/bot.py
