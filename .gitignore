@@ -1,7 +1,8 @@
-/frontend
-
 # compiled output
 /node_modules
+/frontend
+/src
+/test
 
 # Logs
 logs
