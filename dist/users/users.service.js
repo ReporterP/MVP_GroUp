@@ -23,7 +23,6 @@ let UsersService = class UsersService {
     ;
     async create(createUserDto) {
         const user = await this.userRepo.create(createUserDto);
-        console.log(user);
         return user;
     }
     async findOne(id) {
