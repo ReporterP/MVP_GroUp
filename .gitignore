@@ -1,8 +1,8 @@
 # compiled output
+/src
 /node_modules
 /frontend
-/src
-/test
+/.env
 
 # Logs
 logs
