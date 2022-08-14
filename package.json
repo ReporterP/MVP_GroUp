@@ -29,7 +29,7 @@
     "@nestjs/platform-express": "^9.0.9",
     "@nestjs/sequelize": "^9.0.0",
     "@nestjs/serve-static": "^3.0.0",
-    "@nestjs/swagger": "^5.2.1",
+    "@nestjs/swagger": "^6.0.5",
     "express-react-views": "^0.11.0",
     "hbs": "^4.2.0",
     "nodemon": "^2.0.19",
