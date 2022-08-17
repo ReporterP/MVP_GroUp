@@ -14,7 +14,7 @@ export declare class User extends Model<User, UserCreationAttrs> {
     telephone: string;
     telegram_name: string;
     email: string;
-    telegram_id: string;
+    telegram_id: number;
     roadmap: JSON;
 }
 export {};

@@ -14,9 +14,9 @@ export class UsersService {
     return user;
   }
 
-  async findOne(id: number) {
+  async findOne(telegram_id: number) {
     const oneUser = await this.userRepo.findOne({where: {
-      id,
+      telegram_id,
     }});
     return oneUser;
   }

@@ -1,26 +1,22 @@
-import { Injectable } from '@nestjs/common';
-import { CreateAuthDto } from './dto/create-auth.dto';
-import { UpdateAuthDto } from './dto/update-auth.dto';
+import { Inject, Injectable } from "@nestjs/common";
+import { UsersService } from '../users/users.service';
+import { AuthCreateUserDto } from './dto/AuthCreateUserDto';
 
 @Injectable()
 export class AuthService {
-  create(createAuthDto: CreateAuthDto) {
-    return 'This action adds a new auth';
-  }
+    constructor(@Inject(UsersService) private usersService: UsersService) {}
 
-  findAll() {
-    return `This action returns all auth`;
-  }
+    async create(authCreateUserDto: AuthCreateUserDto) {
+        const authUser = await this.usersService.create(authCreateUserDto)
+        return authUser
+    }
 
-  findOne(id: number) {
-    return `This action returns a #${id} auth`;
-  }
-
-  update(id: number, updateAuthDto: UpdateAuthDto) {
-    return `This action updates a #${id} auth`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} auth`;
-  }
+    async findOne(telegram_id: number) {
+        if (telegram_id === 0 ) {
+            return "enter_in_browser" 
+        } else {
+            const oneUser = await this.usersService.findOne(telegram_id)
+            return oneUser == null? "err" : oneUser
+        }
+    }
 }

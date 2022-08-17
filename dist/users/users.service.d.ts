@@ -5,7 +5,7 @@ export declare class UsersService {
     private userRepo;
     constructor(userRepo: typeof User);
     create(createUserDto: CreateUserDto): Promise<User>;
-    findOne(id: number): Promise<User>;
+    findOne(telegram_id: number): Promise<User>;
     update(id: number, updateUserDto: UpdateUserDto): Promise<string>;
     remove(id: number): Promise<string>;
 }

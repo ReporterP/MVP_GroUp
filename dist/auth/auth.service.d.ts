@@ -1,9 +1,8 @@
-import { CreateAuthDto } from './dto/create-auth.dto';
-import { UpdateAuthDto } from './dto/update-auth.dto';
+import { UsersService } from '../users/users.service';
+import { AuthCreateUserDto } from './dto/AuthCreateUserDto';
 export declare class AuthService {
-    create(createAuthDto: CreateAuthDto): string;
-    findAll(): string;
-    findOne(id: number): string;
-    update(id: number, updateAuthDto: UpdateAuthDto): string;
-    remove(id: number): string;
+    private usersService;
+    constructor(usersService: UsersService);
+    create(authCreateUserDto: AuthCreateUserDto): Promise<import("../users/users.model").User>;
+    findOne(telegram_id: number): Promise<import("../users/users.model").User | "enter_in_browser" | "err">;
 }

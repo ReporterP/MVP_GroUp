@@ -25,9 +25,9 @@ let UsersService = class UsersService {
         const user = await this.userRepo.create(createUserDto);
         return user;
     }
-    async findOne(id) {
+    async findOne(telegram_id) {
         const oneUser = await this.userRepo.findOne({ where: {
-                id,
+                telegram_id,
             } });
         return oneUser;
     }
