@@ -8,7 +8,6 @@ export declare class User extends Model<User, UserCreationAttrs> {
     id: number;
     name: string;
     role: boolean;
-    tags: JSON;
     picture: string;
     portfolio: string;
     telephone: string;

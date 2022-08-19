@@ -19,9 +19,6 @@ export class User extends Model<User, UserCreationAttrs> {
     @Column({type: DataType.BOOLEAN, defaultValue: false, allowNull: false })
     role: boolean;
 
-    @Column({type: DataType.JSON})
-    tags: JSON;
-
     @Column({type: DataType.STRING})
     picture: string;
 
