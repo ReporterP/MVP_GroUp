@@ -20,6 +20,8 @@ import { Specialties } from './specialties/models/specialties.model';
 import { ResumeWorkExp } from './resume_work_exp/models/resume_work_exp.model';
 import { ResumeSoft } from './resume_soft/models/resume_soft.model';
 import { ResumeHard } from './resume_hard/models/resume_hard.model';
+import { AuthorPost } from './posts/models/author_post.model';
+import { UserPostLiked } from './posts/models/user_post_liked.model';
 
 
 @Module({
@@ -39,7 +41,7 @@ import { ResumeHard } from './resume_hard/models/resume_hard.model';
       username: process.env.DATABASE_USERNAME,
       password: process.env.DATABASE_PASSWORD,
       database: process.env.DATABASE_NAME,
-      models: [User, Post, TagsUser, TagsPost, Specialties, ResumeWorkExp, ResumeSoft, ResumeHard],
+      models: [User, Post, TagsUser, TagsPost, Specialties, ResumeWorkExp, ResumeSoft, ResumeHard, AuthorPost, UserPostLiked],
       autoLoadModels: true,
       synchronize: true
     }),

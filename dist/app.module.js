@@ -29,6 +29,8 @@ const specialties_model_1 = require("./specialties/models/specialties.model");
 const resume_work_exp_model_1 = require("./resume_work_exp/models/resume_work_exp.model");
 const resume_soft_model_1 = require("./resume_soft/models/resume_soft.model");
 const resume_hard_model_1 = require("./resume_hard/models/resume_hard.model");
+const author_post_model_1 = require("./posts/models/author_post.model");
+const user_post_liked_model_1 = require("./posts/models/user_post_liked.model");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -49,7 +51,7 @@ AppModule = __decorate([
                 username: process.env.DATABASE_USERNAME,
                 password: process.env.DATABASE_PASSWORD,
                 database: process.env.DATABASE_NAME,
-                models: [users_model_1.User, posts_model_1.Post, tags_user_model_1.TagsUser, tags_posts_model_1.TagsPost, specialties_model_1.Specialties, resume_work_exp_model_1.ResumeWorkExp, resume_soft_model_1.ResumeSoft, resume_hard_model_1.ResumeHard],
+                models: [users_model_1.User, posts_model_1.Post, tags_user_model_1.TagsUser, tags_posts_model_1.TagsPost, specialties_model_1.Specialties, resume_work_exp_model_1.ResumeWorkExp, resume_soft_model_1.ResumeSoft, resume_hard_model_1.ResumeHard, author_post_model_1.AuthorPost, user_post_liked_model_1.UserPostLiked],
                 autoLoadModels: true,
                 synchronize: true
             }),

@@ -1,4 +1,7 @@
-import { Model, Table, Column, DataType } from "sequelize-typescript";
+import { UserPostLiked } from './user_post_liked.model';
+import { Model, Table, Column, DataType, BelongsToMany } from "sequelize-typescript";
+import { User } from "src/users/models/users.model";
+import { AuthorPost } from "./author_post.model";
 
 interface PostCreationAttr {
     type: string,
@@ -25,9 +28,11 @@ export class Post extends Model<Post, PostCreationAttr> {
     
     @Column({type: DataType.STRING})
     picture: string;
-}
 
-//       C чем свзязываем   Таблица связи
-// @BeLongsToMany(()=>User, ()=>Author_post)
-// users: User[]
+    @BelongsToMany(() => User, () => AuthorPost)
+    user_id: User[];
+
+    @BelongsToMany(() => User, () => UserPostLiked)
+    user_like_id: User[];
+}
 

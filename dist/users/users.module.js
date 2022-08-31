@@ -7,16 +7,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UsersModule = void 0;
-const users_model_1 = require("./models/users.model");
 const common_1 = require("@nestjs/common");
 const users_service_1 = require("./users.service");
 const users_controller_1 = require("./users.controller");
 const sequelize_1 = require("@nestjs/sequelize");
+const posts_model_1 = require("../posts/models/posts.model");
+const author_post_model_1 = require("../posts/models/author_post.model");
+const user_post_liked_model_1 = require("../posts/models/user_post_liked.model");
+const posts_module_1 = require("../posts/posts.module");
+const users_model_1 = require("./models/users.model");
 let UsersModule = class UsersModule {
 };
 UsersModule = __decorate([
     (0, common_1.Module)({
-        imports: [sequelize_1.SequelizeModule.forFeature([users_model_1.User])],
+        imports: [sequelize_1.SequelizeModule.forFeature([users_model_1.User, posts_model_1.Post, author_post_model_1.AuthorPost, user_post_liked_model_1.UserPostLiked]), (0, common_1.forwardRef)(() => posts_module_1.PostsModule)],
         controllers: [users_controller_1.UsersController],
         providers: [users_service_1.UsersService],
         exports: [users_service_1.UsersService],

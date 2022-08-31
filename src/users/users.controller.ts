@@ -17,6 +17,16 @@ export class UsersController {
     return this.usersService.findOne(+id);
   }
 
+  @Get('posts/:id')
+  getUserPost(@Param('id') id: string) {
+    return this.usersService.getUserPost(+id)
+  }
+
+  @Get('likeposts/:id')
+  getLikedPost(@Param('id') id: string) {
+    return this.usersService.getLikedPost(+id)
+  }
+
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.usersService.update(+id, updateUserDto);

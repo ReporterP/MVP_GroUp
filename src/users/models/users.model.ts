@@ -1,4 +1,7 @@
-import { Model, Table, Column, DataType } from "sequelize-typescript";
+import { Model, Table, Column, DataType, BelongsToMany } from "sequelize-typescript";
+import { AuthorPost } from "src/posts/models/author_post.model";
+import { UserPostLiked } from "src/posts/models/user_post_liked.model";
+import { Post } from '../../posts/models/posts.model';
 
 interface UserCreationAttrs {
     telegram_id: string;
@@ -40,9 +43,9 @@ export class User extends Model<User, UserCreationAttrs> {
     @Column({type: DataType.JSON})
     roadmap: JSON;
 
-    //       C чем свзязываем   Таблица связи
-    // @BeLongsToMany(()=>Posts, ()=>Author_post)
-    // posts: Posts[]
-    // необхадимо добваить сущности в импорты и Author_post тоже 
-    // Создать Author_post.model.ts в любой папке из тех которые связываем
+    @BelongsToMany(() => Post, () => AuthorPost)
+    post_id: Post[];
+
+    @BelongsToMany(() => Post, () => UserPostLiked)
+    post_like_id: Post[];
 }

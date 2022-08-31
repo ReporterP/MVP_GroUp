@@ -25,11 +25,27 @@ let UsersService = class UsersService {
         const user = await this.userRepo.create(createUserDto);
         return user;
     }
+    async findOneByID(id) {
+        const oneUser = await this.userRepo.findOne({ where: {
+                id,
+            } });
+        return oneUser.id;
+    }
     async findOne(telegram_id) {
         const oneUser = await this.userRepo.findOne({ where: {
                 telegram_id,
             } });
         return oneUser;
+    }
+    async getUserPost(user_id) {
+        const user = await this.userRepo.findByPk(user_id);
+        const getPost = await user.$get("post_id");
+        return getPost;
+    }
+    async getLikedPost(user_id) {
+        const user = await this.userRepo.findByPk(user_id);
+        const getPost = await user.$get("post_like_id");
+        return getPost;
     }
     async update(id, updateUserDto) {
         const user = await this.userRepo.update(Object.assign({}, updateUserDto), { where: { id } });
