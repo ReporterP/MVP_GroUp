@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UsersService = void 0;
 const common_1 = require("@nestjs/common");
 const sequelize_1 = require("@nestjs/sequelize");
-const users_model_1 = require("./users.model");
+const users_model_1 = require("./models/users.model");
 let UsersService = class UsersService {
     constructor(userRepo) {
         this.userRepo = userRepo;
@@ -32,10 +32,8 @@ let UsersService = class UsersService {
         return oneUser;
     }
     async update(id, updateUserDto) {
-        return `This action updates a #${id} user`;
-    }
-    async remove(id) {
-        return `This action removes a #${id} user`;
+        const user = await this.userRepo.update(Object.assign({}, updateUserDto), { where: { id } });
+        return user;
     }
 };
 UsersService = __decorate([

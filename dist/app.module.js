@@ -12,9 +12,23 @@ const serve_static_1 = require("@nestjs/serve-static");
 const path_1 = require("path");
 const users_module_1 = require("./users/users.module");
 const sequelize_1 = require("@nestjs/sequelize");
-const users_model_1 = require("./users/users.model");
 const config_1 = require("@nestjs/config");
 const auth_module_1 = require("./auth/auth.module");
+const posts_module_1 = require("./posts/posts.module");
+const tags_user_module_1 = require("./tags_user/tags_user.module");
+const tags_posts_module_1 = require("./tags_posts/tags_posts.module");
+const resume_soft_module_1 = require("./resume_soft/resume_soft.module");
+const resume_hard_module_1 = require("./resume_hard/resume_hard.module");
+const resume_work_exp_module_1 = require("./resume_work_exp/resume_work_exp.module");
+const specialties_module_1 = require("./specialties/specialties.module");
+const users_model_1 = require("./users/models/users.model");
+const posts_model_1 = require("./posts/models/posts.model");
+const tags_user_model_1 = require("./tags_user/models/tags_user.model");
+const tags_posts_model_1 = require("./tags_posts/models/tags_posts.model");
+const specialties_model_1 = require("./specialties/models/specialties.model");
+const resume_work_exp_model_1 = require("./resume_work_exp/models/resume_work_exp.model");
+const resume_soft_model_1 = require("./resume_soft/models/resume_soft.model");
+const resume_hard_model_1 = require("./resume_hard/models/resume_hard.model");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -35,7 +49,7 @@ AppModule = __decorate([
                 username: process.env.DATABASE_USERNAME,
                 password: process.env.DATABASE_PASSWORD,
                 database: process.env.DATABASE_NAME,
-                models: [users_model_1.User],
+                models: [users_model_1.User, posts_model_1.Post, tags_user_model_1.TagsUser, tags_posts_model_1.TagsPost, specialties_model_1.Specialties, resume_work_exp_model_1.ResumeWorkExp, resume_soft_model_1.ResumeSoft, resume_hard_model_1.ResumeHard],
                 autoLoadModels: true,
                 synchronize: true
             }),
@@ -44,6 +58,13 @@ AppModule = __decorate([
             }),
             users_module_1.UsersModule,
             auth_module_1.AuthModule,
+            posts_module_1.PostsModule,
+            tags_user_module_1.TagsUserModule,
+            tags_posts_module_1.TagsPostsModule,
+            resume_soft_module_1.ResumeSoftModule,
+            resume_hard_module_1.ResumeHardModule,
+            resume_work_exp_module_1.ResumeWorkExpModule,
+            specialties_module_1.SpecialtiesModule,
         ],
         controllers: [],
         providers: [],

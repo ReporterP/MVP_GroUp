@@ -39,4 +39,10 @@ export class User extends Model<User, UserCreationAttrs> {
 
     @Column({type: DataType.JSON})
     roadmap: JSON;
+
+    //       C чем свзязываем   Таблица связи
+    // @BeLongsToMany(()=>Posts, ()=>Author_post)
+    // posts: Posts[]
+    // необхадимо добваить сущности в импорты и Author_post тоже 
+    // Создать Author_post.model.ts в любой папке из тех которые связываем
 }

@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { User } from './users.model';
+import { User } from './models/users.model';
 
 @Injectable()
 export class UsersService {
@@ -22,10 +22,12 @@ export class UsersService {
   }
 
   async update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+    const user = await this.userRepo.update({...updateUserDto}, {where: {id}});
+    return user;
   }
 
-  async remove(id: number) {
-    return `This action removes a #${id} user`;
-  }
+  // async remove(id: number) {
+  //   const user = await this.userRepo.destroy({where: {id}});
+  //   return user;
+  // }
 }
