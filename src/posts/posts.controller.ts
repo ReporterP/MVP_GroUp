@@ -18,7 +18,7 @@ export class PostsController {
     return this.postsService.likePost(LikePostDto);
   }
   
-  @Post('deleteLike')
+  @Delete('like')
   deleteLikePost(@Body() LikePostDto: LikePostDto) {
     return this.postsService.deleteLikePost(LikePostDto);
   }

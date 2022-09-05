@@ -1,0 +1,150 @@
+.posts { 
+    padding: 17% 20px 9px 20px;
+}
+.card {
+    margin-bottom: 24px;
+    border-radius: 5px;
+    padding: 0;
+    border: none;
+    background-color: #485063;
+    position: relative;
+}
+
+.status {
+    font-size: 9px;
+    padding: 4px 9px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border-radius: 20px;
+}
+
+.backButton {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+}
+
+.cardPrew {
+    overflow: hidden;
+    img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+.cardContent {
+    padding: 10px 20px;
+}
+
+.viewCardContent {
+    margin-top: 10px;
+    padding: 10px 20px;
+
+}
+
+.cardText {
+    h5 {
+        font-size: 14px;
+        color: $base-text-color;
+    }
+    p {
+        height: 39px;
+        font-size: 9px;
+    }
+    .tags {
+        overflow-y: scroll;
+        display: flex;
+        align-items: center;
+        margin-bottom: 4px;
+        .tag {
+            width: fit-content;
+            padding: 2px 6px;
+            border-radius: 20px;
+            margin-right: 5px;
+            font-size: 8px;
+        }
+    }
+}
+
+.viewCardText {
+    p {
+        height: 168px;
+        overflow-y: scroll;
+    }
+}
+
+
+.cardButtons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+    button {
+        background-color: transparent;
+        border: none;
+        border-radius: 20px;
+        font-size: 9px;
+    }
+    .view {
+        padding: 3px 11px;
+        background-color: $main-color;
+        color: $base-text-color;
+    }
+    .check {
+        padding: 3px 23px;
+        background-color: $active-color;
+    }
+}
+
+.viewCardButtons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    button {
+        background-color: transparent;
+        border: none;
+        border-radius: 20px;
+        font-size: 9px;
+    }
+    .viewCheck {
+        padding: 9px 28px;
+        background-color: $active-color;
+        font-size: 9px;
+    }
+}
+
+.viewContainer {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 99999;
+    &>div {
+        width: 100%;
+        height: 100vh;
+        position: relative;
+        .animated {
+            width: 100%;
+            bottom: 0;
+            position: absolute;
+            z-index: 99999;
+        } 
+    }
+}
+.closeSpace {
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    background: rgba(47, 47, 47, 0.7);
+    z-index: 99998;
+}
+.viewPost {
+    width: 100%;
+    background-color: $base-background-color;
+    border-radius: 5px;
+}
