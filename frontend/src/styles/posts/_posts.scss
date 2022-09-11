@@ -156,8 +156,12 @@
     background: rgba(47, 47, 47, 0.7);
     z-index: 99998;
 }
+
 .viewPost {
     width: 100%;
     background-color: $base-background-color;
     border-radius: 5px;
+    &.withoutPicture {
+        padding-top: 35px;
+    }
 }
