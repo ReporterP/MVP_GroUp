@@ -7,9 +7,6 @@ const Post = props => {
 
   const [isOpen, setIsOpen] = useState(false)
 
-  var cardStyle = {
-    height: props.picture===""?"140px":"328px"
-  }
   var cardPrewStyle = {
     height: props.picture===""?0:"188px"
   }
@@ -17,7 +14,7 @@ const Post = props => {
 
   return (
     <>
-      <div className='card' style={cardStyle}>
+      <div className='card'>
       <div className='status' style={statusStyle}>{props.status[1]}</div>
         <div className='cardPrew' style={cardPrewStyle}>
           <img src={props.picture} alt="" />

@@ -51,6 +51,10 @@
     h5 {
         font-size: 14px;
         color: $base-text-color;
+        min-height: 25px;
+        max-width: $max-screen-width - 200px;
+        overflow-wrap: break-word;
+        word-break: break-all;
     }
     p {
         height: 39px;
@@ -76,6 +80,9 @@
 }
 
 .viewCardText {
+    h5 {
+        max-width: 100%;
+    }
     p {
         height: 168px;
         overflow-y: scroll;

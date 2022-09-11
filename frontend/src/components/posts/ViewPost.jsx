@@ -30,9 +30,9 @@ var cardPrewStyle = {
                   <div className='tags'>
                     {
                       props.tags.map(e=>{
-                      tagStyle = {backgroundColor: e[1]}
-                      return <div className='tag' style={tagStyle}>{e[0]}</div>
-                    })
+                        tagStyle = {backgroundColor: e[1]}
+                        return <div className='tag' style={tagStyle}>{e[0]}</div>
+                      })
                     }
                   </div>
                   <p>{props.description}</p>
