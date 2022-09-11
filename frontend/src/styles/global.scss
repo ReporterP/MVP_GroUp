@@ -8,8 +8,14 @@
     margin: 0;
 }
 
+html {
+    background-color: $main-color;
+}
+
 body {
     background-color: $main-color;
+    max-width: $max-screen-width;
+    margin: auto;
 }
 
 p {

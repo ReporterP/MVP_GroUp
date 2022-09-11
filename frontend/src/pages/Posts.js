@@ -4,7 +4,7 @@ import PostImage from '../img/PostImage.png'
 
 const Posts = () => {
     var card = {
-        status: ['#24D756', "Мироприятие"],
+        status: ['#24D756', "Мероприятие"],
         picture: PostImage,
         name: "Мероприятие длинное название",
         tags: [["онлайн", '#E6D268'], ["JavaScript", '#68E68B'], 

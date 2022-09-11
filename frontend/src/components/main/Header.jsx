@@ -8,11 +8,9 @@ const Header = props => {
   }
 
   return (
-    <div>
-      <header style={headerStyle}>
-        <Logo/>
-      </header>
-    </div>
+    <header style={headerStyle}>
+      <Logo/>
+    </header>
   );
 }
 

@@ -1,17 +1,19 @@
 @import url(./variables.scss);
 
 header {
+    position: fixed;
+    left: 0;
+    z-index: 9999;
+    // max-width: $max-screen-width;
     width: 100%;
-    height: auto;
-    padding: 10px 20px;
+    background: rgba(47, 47, 47, 0.7);
+    backdrop-filter: blur(10px);
+    padding: 10px calc(50% - $max-screen-width / 2 + 20px * 2);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgba(47, 47, 47, 0.7);
-    backdrop-filter: blur(10px);
-    z-index: 9999;
     img {   
-        width: 15%;
+        max-width: calc($max-screen-width * 0.15);
         height: auto;
     }
 }
@@ -19,8 +21,9 @@ header {
 footer {
     width: 100%;
     position: fixed;
+    left: 0;
     bottom: 0;
-    padding: 18px 77px;
+    padding: 18px calc(77px + (50% - $max-screen-width / 2));
     display: flex;
     justify-content: space-between;
     align-items: center;
