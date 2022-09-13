@@ -1,4 +1,6 @@
-import { Model, Table, Column, DataType } from "sequelize-typescript";
+import { Model, Table, Column, DataType, BelongsToMany } from "sequelize-typescript";
+import { Post } from '../../posts/models/posts.model';
+import { PostsTags } from './posts_tags.model';
 
 interface TagsPostCreationAttr {
     tag: string,
@@ -16,4 +18,7 @@ export class TagsPost extends Model<TagsPost, TagsPostCreationAttr> {
 
     @Column({type: DataType.STRING, allowNull: false})
     color: string;
+
+    @BelongsToMany(() => Post, () => PostsTags)
+    post_id: Post[];
 }

@@ -1,3 +1,4 @@
+import { TagsPostsModule } from './../tags_posts/tags_posts.module';
 import { Module, forwardRef } from '@nestjs/common';
 import { PostsService } from './posts.service';
 import { PostsController } from './posts.controller';
@@ -9,7 +10,7 @@ import { AuthorPost } from './models/author_post.model';
 import { UsersModule } from '../users/users.module';
 
 @Module({
-  imports: [SequelizeModule.forFeature([Post, User, UserPostLiked, AuthorPost]), forwardRef(() => UsersModule)],
+  imports: [SequelizeModule.forFeature([Post, User, UserPostLiked, AuthorPost]), forwardRef(() => UsersModule), TagsPostsModule],
   controllers: [PostsController],
   providers: [PostsService],
   exports: [PostsService]

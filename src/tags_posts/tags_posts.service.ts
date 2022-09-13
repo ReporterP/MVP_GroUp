@@ -19,6 +19,13 @@ export class TagsPostsService {
     return tags;
   }
 
+  async findOneByName(tag: string) {
+    const tagg = await this.tagsPostRepo.findOne({where: {
+      tag,
+    }})
+    return tagg;
+  }
+
   async findOne(id: number) {
     const tag = await this.tagsPostRepo.findOne({where: {
       id,
