@@ -9,7 +9,9 @@ const Header = props => {
 
   return (
     <header style={headerStyle}>
-      <Logo/>
+      <div className="container">
+        <Logo/>
+      </div>
     </header>
   );
 }

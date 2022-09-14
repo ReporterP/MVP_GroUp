@@ -22,12 +22,14 @@ const Footer = props => {
   return (
     <div>
       <footer>
-        <button onClick={post}>
-          <img src={link==="post"?postsActive:posts} alt="posts" />
-        </button>
-        <button onClick={profile}>
-          <img src={link==="profile"?grofileActive:grofile} alt="profile" />
-        </button>
+        <div className="container">
+          <button onClick={post}>
+            <img src={link==="post"?postsActive:posts} alt="posts" />
+          </button>
+          <button onClick={profile}>
+            <img src={link==="profile"?grofileActive:grofile} alt="profile" />
+          </button>
+        </div>
       </footer>
     </div>
   );

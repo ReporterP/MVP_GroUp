@@ -8,13 +8,20 @@ header {
     width: 100%;
     background: rgba(47, 47, 47, 0.7);
     backdrop-filter: blur(10px);
-    padding: 10px calc(50% - $max-screen-width / 2 + 20px * 2);
+    padding: 10px 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
     img {   
         max-width: calc($max-screen-width * 0.15);
         height: auto;
+    }
+    .container {
+        width: calc($max-screen-width - 80px);
+        margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
     }
 }
 
@@ -23,15 +30,19 @@ footer {
     position: fixed;
     left: 0;
     bottom: 0;
-    padding: 18px calc(77px + (50% - $max-screen-width / 2));
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    padding: 18px 0;
     background-color: $base-background-color;
     z-index: 9999;
     button {
         border: none;
         background-color: transparent;
+    }
+    .container {
+        max-width: calc($max-screen-width / 2 + 40px);
+        margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
     }
 }
 
