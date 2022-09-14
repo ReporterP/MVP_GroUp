@@ -19,12 +19,12 @@ export class UsersController {
 
   @Get('posts/:id')
   getUserPost(@Param('id') id: string) {
-    return this.usersService.getUserPost(+id)
+    return this.usersService.getUserPost(+id);
   }
 
   @Get('likeposts/:id')
   getLikedPost(@Param('id') id: string) {
-    return this.usersService.getLikedPost(+id)
+    return this.usersService.getLikedPost(+id);
   }
 
   @Patch(':id')

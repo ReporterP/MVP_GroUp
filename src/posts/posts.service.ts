@@ -23,7 +23,7 @@ export class PostsService {
   async create(createPostDto: CreatePostDto) {
     const post = await this.postRepo.create(createPostDto);
     const user = await this.usersService.findOneByID(createPostDto.user_id);
-    createPostDto.tags.map(async e=>{
+    createPostDto.tags.map(async (e: string)=>{
       await this.tagsPostsService.findOneByName(e)?0
       :await this.tagsPostsService.create({
           "tag":e,
@@ -71,8 +71,7 @@ export class PostsService {
   async update(id: number, updatePostDto: UpdatePostDto) {
 
     var oldTags:Array<string> = []
-    const postTag = await (await this.postRepo.findOne({include: [TagsPost], where: {id}})).tag_id
-    console.log(postTag)
+    const postTag = await (await this.findOne(id)).tag_id
     postTag.map(e=>oldTags.push(e["tag"]))
     const post = await this.postRepo.findByPk(id);
 

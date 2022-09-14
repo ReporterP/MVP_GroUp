@@ -1,4 +1,6 @@
-import { Model, Table, Column, DataType } from "sequelize-typescript";
+import { Model, Table, Column, DataType, BelongsToMany } from "sequelize-typescript";
+import { User } from '../../users/models/users.model';
+import { UserTags } from './user_tags.model';
 
 interface TagsUserCreationAttr {
     tag: string,
@@ -16,4 +18,7 @@ export class TagsUser extends Model<TagsUser, TagsUserCreationAttr> {
 
     @Column({type: DataType.STRING, allowNull: false})
     color: string;
+
+    @BelongsToMany(()=> User, () => UserTags)
+    user_id: User[]
 }

@@ -3,6 +3,7 @@ import { InjectModel } from '@nestjs/sequelize';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './models/users.model';
+import { TagsUser } from '../tags_user/models/tags_user.model';
 
 @Injectable()
 export class UsersService {
@@ -19,6 +20,14 @@ export class UsersService {
       id,
     }});
     return oneUser.id;
+  }
+
+  async findOneUserForTags(id: number) {
+    const oneUser = await this.userRepo.findOne({where: {
+      id,
+    }, 
+    include: [TagsUser]});
+    return oneUser;
   }
 
   async findOne(telegram_id: number) {

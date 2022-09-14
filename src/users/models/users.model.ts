@@ -2,6 +2,8 @@ import { Model, Table, Column, DataType, BelongsToMany } from "sequelize-typescr
 import { AuthorPost } from "src/posts/models/author_post.model";
 import { UserPostLiked } from "src/posts/models/user_post_liked.model";
 import { Post } from '../../posts/models/posts.model';
+import { TagsUser } from '../../tags_user/models/tags_user.model';
+import { UserTags } from '../../tags_user/models/user_tags.model';
 
 interface UserCreationAttrs {
     telegram_id: string;
@@ -48,4 +50,7 @@ export class User extends Model<User, UserCreationAttrs> {
 
     @BelongsToMany(() => Post, () => UserPostLiked)
     post_like_id: Post[];
+
+    @BelongsToMany(() => TagsUser, () => UserTags)
+    tag_id: TagsUser[]
 }
