@@ -6,6 +6,7 @@ export declare class UsersService {
     constructor(userRepo: typeof User);
     create(createUserDto: CreateUserDto): Promise<User>;
     findOneByID(id: number): Promise<number>;
+    findOneUserForTags(id: number): Promise<User>;
     findOne(telegram_id: number): Promise<User>;
     getUserPost(user_id: number): Promise<import("../posts/models/posts.model").Post[]>;
     getLikedPost(user_id: number): Promise<import("../posts/models/posts.model").Post[]>;

@@ -4,4 +4,5 @@ export class CreatePostDto {
     readonly text;
     readonly picture;
     readonly user_id;
+    readonly tags;
 }

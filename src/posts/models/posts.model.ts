@@ -2,6 +2,8 @@ import { UserPostLiked } from './user_post_liked.model';
 import { Model, Table, Column, DataType, BelongsToMany } from "sequelize-typescript";
 import { User } from "src/users/models/users.model";
 import { AuthorPost } from "./author_post.model";
+import { TagsPost } from '../../tags_posts/models/tags_posts.model';
+import { PostsTags } from '../../tags_posts/models/posts_tags.model';
 
 interface PostCreationAttr {
     type: string,
@@ -34,5 +36,8 @@ export class Post extends Model<Post, PostCreationAttr> {
 
     @BelongsToMany(() => User, () => UserPostLiked)
     user_like_id: User[];
+
+    @BelongsToMany(() => TagsPost, () => PostsTags)
+    tag_id: TagsPost[];
 }
 

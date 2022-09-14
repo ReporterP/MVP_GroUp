@@ -7,28 +7,28 @@ import { UpdateTagsPostDto } from './dto/update-tags_post.dto';
 export class TagsPostsController {
   constructor(private readonly tagsPostsService: TagsPostsService) {}
 
-  @Post()
-  create(@Body() createTagsPostDto: CreateTagsPostDto) {
-    return this.tagsPostsService.create(createTagsPostDto);
-  }
+  // @Post()
+  // create(@Body() createTagsPostDto: CreateTagsPostDto) {
+  //   return this.tagsPostsService.create(createTagsPostDto);
+  // }
 
   @Get()
   findAll() {
     return this.tagsPostsService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.tagsPostsService.findOne(+id);
-  }
+  // @Get(':id')
+  // findOne(@Param('id') id: string) {
+  //   return this.tagsPostsService.findOne(+id);
+  // }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateTagsPostDto: UpdateTagsPostDto) {
-    return this.tagsPostsService.update(+id, updateTagsPostDto);
-  }
+  // @Patch(':id')
+  // update(@Param('id') id: string, @Body() updateTagsPostDto: UpdateTagsPostDto) {
+  //   return this.tagsPostsService.update(+id, updateTagsPostDto);
+  // }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.tagsPostsService.remove(+id);
-  }
+  // @Delete(':id')
+  // remove(@Param('id') id: string) {
+  //   return this.tagsPostsService.remove(+id);
+  // }
 }

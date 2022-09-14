@@ -16,6 +16,7 @@ exports.UsersService = void 0;
 const common_1 = require("@nestjs/common");
 const sequelize_1 = require("@nestjs/sequelize");
 const users_model_1 = require("./models/users.model");
+const tags_user_model_1 = require("../tags_user/models/tags_user.model");
 let UsersService = class UsersService {
     constructor(userRepo) {
         this.userRepo = userRepo;
@@ -30,6 +31,13 @@ let UsersService = class UsersService {
                 id,
             } });
         return oneUser.id;
+    }
+    async findOneUserForTags(id) {
+        const oneUser = await this.userRepo.findOne({ where: {
+                id,
+            },
+            include: [tags_user_model_1.TagsUser] });
+        return oneUser;
     }
     async findOne(telegram_id) {
         const oneUser = await this.userRepo.findOne({ where: {
