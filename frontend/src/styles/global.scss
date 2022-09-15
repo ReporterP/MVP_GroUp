@@ -24,3 +24,15 @@ p {
     margin: 0;
     color: $base-text-color ;
 }
+
+.flex {
+    display: flex;
+}
+
+.flexSpaceBetween {
+    justify-content: space-between;
+}
+
+.flexItemsCenter {
+    align-items: center;
+}
