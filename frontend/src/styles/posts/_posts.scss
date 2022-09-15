@@ -141,8 +141,8 @@
         height: 100vh;
         position: relative;
         .animated {
-            width: $max-screen-width;
-            left: calc(50% - $max-screen-width / 2);
+            width: min($max-screen-width, 100%);
+            margin: auto;
             bottom: 0;
             position: absolute;
             z-index: 99999;
