@@ -13,10 +13,8 @@ const GroFile = () => {
     return (
         <div>
             <Header post={isPosts}/>
-            <div id="scroll-container">
                 {isPosts && <Suspense fallback={<Loading/>}><Posts /></Suspense>}
                 {isProfile && <Suspense fallback={<Loading/>}><Profile /></Suspense>}
-            </div>
             <Footer profile={setIsProfile} post={setisPosts}/>
         </div>
     );
