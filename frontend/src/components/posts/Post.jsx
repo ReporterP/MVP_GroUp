@@ -16,7 +16,7 @@ const Post = props => {
     <>
       <div className='card'>
       <div className='status' style={statusStyle}>{props.status[1]}</div>
-        <div className='cardPrew' style={cardPrewStyle}>
+        <div className='cardPrew'>
           <img src={props.picture} alt="" />
         </div>
         <div className='cardContent'>

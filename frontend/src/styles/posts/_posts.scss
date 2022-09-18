@@ -1,5 +1,5 @@
 .posts { 
-    padding: 10px 20px 9px 20px;
+    padding: 70px 20px 9px 20px;
 }
 
 .card {
@@ -16,8 +16,8 @@
     padding: 4px 9px;
     position: absolute;
     top: 10px;
-    right: 10px;
     border-radius: 20px;
+    right: 10px;
 }
 
 .backButton {
@@ -38,7 +38,7 @@
 }
 
 .cardContent {
-    padding: 10px 20px;
+    padding: 15px 20px 10px 20px;
 }
 
 .viewCardContent {
@@ -50,14 +50,12 @@
 .cardText {
     h5 {
         font-size: 14px;
+        line-height: 1;
         color: $base-text-color;
-        min-height: 25px;
-        max-width: $max-screen-width - 200px;
         overflow-wrap: break-word;
-        word-break: break-all;
+        margin-bottom: 10px;
     }
     p {
-        height: 39px;
         font-size: 9px;
     }
     .tags {
@@ -73,7 +71,6 @@
             font-size: 8px;
         }
         &::-webkit-scrollbar {
-            // transform: translateY(-5px);
             display: none;
         }
     }
