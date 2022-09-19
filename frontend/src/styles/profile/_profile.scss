@@ -106,3 +106,80 @@
         
     }
 }
+
+.tagsPopup {
+    min-height: 400px;
+    background-color: $base-background-color;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+
+    .topBar {
+        width: calc(100% - 40px);
+        display: flex;
+        padding: 17px 20px 0 20px;
+        justify-content: space-between;
+
+        button {
+            background-color: #68e68b;
+            border-radius: 5px;
+            border: none;
+            padding: 3px 22px;
+        }
+    }
+
+    .addTagButton {
+        width: calc(100% - 40px);
+        background-color: #68e68b;
+        border-radius: 5px;
+        padding: 3px 0;
+        border: none;
+        margin-top: 25px;
+        margin-bottom: 15px;
+    }
+
+    .tagsList {
+        width: calc(100% - 40px);
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: flex-start;
+        flex-direction: column;
+
+        .tagsMenuItem {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+
+            span {
+                min-width: 40px;
+                padding: 3px 8px;
+                border-radius: 5px;
+                font-size: 8pt;
+                text-align: center;
+            }
+
+            .tagEditTools {
+                display: flex;
+                gap: 10px;
+                align-items: center;
+
+                .colorPicker {
+                    width: 16px;
+                    height: 16px;
+                    border-radius: 8px;
+                }
+            }
+        }
+
+        hr {
+            width: 100%;
+            height: 1px;
+            background: #485063;
+            border: none;
+        }
+    }
+}
