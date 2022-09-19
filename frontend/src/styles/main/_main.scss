@@ -5,8 +5,7 @@ header {
     top: 0;
     left: 0;
     z-index: 9999;
-    // max-width: $max-screen-width;
-    width: 100%;
+    width: 100vw;
     background: rgba(47, 47, 47, 0.7);
     backdrop-filter: blur(10px);
     padding: 10px 0;
@@ -27,7 +26,7 @@ header {
 }
 
 footer {
-    width: 100%;
+    width: 100vw;
     position: fixed;
     left: 0;
     bottom: 0;
