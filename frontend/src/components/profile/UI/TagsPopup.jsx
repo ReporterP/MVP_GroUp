@@ -1,12 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Animated } from "react-animated-css";
 import TagMenuItem from './TagMenuItem.jsx';
 
 const TagsPopup = props => {
-    const tagTemp = {
-        title: 'React',
-        color: '#f272de'
-    }
 
     const tagsArray = [
         {
@@ -38,8 +34,6 @@ const TagsPopup = props => {
                         <button className='addTagButton'>Добавить тег</button>
 
                         <div className='tagsList'>
-                            {/* ... */}
-
                             {tagsArray.map(t =>
                                 <>
                                 <TagMenuItem
@@ -49,8 +43,6 @@ const TagsPopup = props => {
                                 <hr />
                                 </>
                             )}
-
-                            {/* ... */}
                         </div>
                     </div>
                 </Animated>
