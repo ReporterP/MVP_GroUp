@@ -12,6 +12,16 @@ export class SpecialtiesController {
     return this.specialtiesService.create(createSpecialtyDto);
   }
 
+  @Post(':user_id')
+  addNewSpecialties(@Param('user_id') user_id: string, @Body() createSpecialtyDto: CreateSpecialtyDto){
+    return this.specialtiesService.addNewSpecialties(+user_id ,createSpecialtyDto)
+  }
+
+  @Get(':user_id')
+  findSpecUser(@Param('user_id') user_id: string){
+    return this.specialtiesService.findSpecUser(+user_id)
+  }
+
   @Get()
   findAll() {
     return this.specialtiesService.findAll();
@@ -20,6 +30,11 @@ export class SpecialtiesController {
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.specialtiesService.findOne(+id);
+  }
+
+  @Patch(':user_id')
+  updateSpecUser(@Param('user_id') user_id: string, @Body() updateSpecialtyDto: UpdateSpecialtyDto) {
+    return this.specialtiesService.updateSpecUser(+user_id, updateSpecialtyDto);
   }
 
   @Patch(':id')

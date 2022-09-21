@@ -17,6 +17,11 @@ export class UsersController {
     return this.usersService.findOne(+id);
   }
 
+  @Get('resume/:id')
+  findOneUserForResume(@Param('id') id: string) {
+    return this.usersService.findOneUserForResume(+id);
+  }
+
   @Get('posts/:id')
   getUserPost(@Param('id') id: string) {
     return this.usersService.getUserPost(+id);

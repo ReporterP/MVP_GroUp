@@ -6,6 +6,7 @@ export declare class UsersController {
     constructor(usersService: UsersService);
     create(createUserDto: CreateUserDto): Promise<import("./models/users.model").User>;
     findOne(id: string): Promise<import("./models/users.model").User>;
+    findOneUserForResume(id: string): Promise<import("./models/users.model").User>;
     getUserPost(id: string): Promise<import("../posts/models/posts.model").Post[]>;
     getLikedPost(id: string): Promise<import("../posts/models/posts.model").Post[]>;
     update(id: string, updateUserDto: UpdateUserDto): Promise<[affectedCount: number]>;

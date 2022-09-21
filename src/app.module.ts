@@ -24,6 +24,8 @@ import { AuthorPost } from './posts/models/author_post.model';
 import { UserPostLiked } from './posts/models/user_post_liked.model';
 import { PostsTags } from './tags_posts/models/posts_tags.model';
 import { UserTags } from './tags_user/models/user_tags.model';
+import { UserSpecialties } from './specialties/models/user_specialties.model';
+import { UserResumeHard } from './resume_hard/models/user_resume_hard.model';
 
 
 @Module({
@@ -43,7 +45,7 @@ import { UserTags } from './tags_user/models/user_tags.model';
       username: process.env.DATABASE_USERNAME,
       password: process.env.DATABASE_PASSWORD,
       database: process.env.DATABASE_NAME,
-      models: [User, Post, TagsUser, UserTags ,TagsPost, PostsTags, Specialties, ResumeWorkExp, ResumeSoft, ResumeHard, AuthorPost, UserPostLiked],
+      models: [User, Post, TagsUser, UserTags ,TagsPost, PostsTags, Specialties, UserSpecialties, ResumeWorkExp, ResumeSoft, ResumeHard, UserResumeHard , AuthorPost, UserPostLiked],
       autoLoadModels: true,
       synchronize: true
     }),

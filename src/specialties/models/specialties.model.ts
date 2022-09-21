@@ -1,4 +1,6 @@
-import { Model, Table, Column, DataType } from "sequelize-typescript";
+import { Model, Table, Column, DataType, BelongsToMany } from "sequelize-typescript";
+import { UserSpecialties } from './user_specialties.model';
+import { User } from '../../users/models/users.model';
 
 interface SpecialtiesCreationAttr {
     name: string
@@ -12,4 +14,7 @@ export class Specialties extends Model<Specialties, SpecialtiesCreationAttr> {
 
     @Column({type: DataType.STRING, allowNull: false})
     name: string;
+
+    @BelongsToMany(() => User, () => UserSpecialties)
+    user_id: User[];
 }

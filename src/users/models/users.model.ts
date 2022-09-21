@@ -4,6 +4,10 @@ import { UserPostLiked } from "src/posts/models/user_post_liked.model";
 import { Post } from '../../posts/models/posts.model';
 import { TagsUser } from '../../tags_user/models/tags_user.model';
 import { UserTags } from '../../tags_user/models/user_tags.model';
+import { Specialties } from '../../specialties/models/specialties.model';
+import { UserSpecialties } from '../../specialties/models/user_specialties.model';
+import { ResumeHard } from '../../resume_hard/models/resume_hard.model';
+import { UserResumeHard } from '../../resume_hard/models/user_resume_hard.model';
 
 interface UserCreationAttrs {
     telegram_id: string;
@@ -52,5 +56,11 @@ export class User extends Model<User, UserCreationAttrs> {
     post_like_id: Post[];
 
     @BelongsToMany(() => TagsUser, () => UserTags)
-    tag_id: TagsUser[]
+    tag_id: TagsUser[];
+
+    @BelongsToMany(() => Specialties, () => UserSpecialties)
+    specialties_id: Specialties[];
+
+    @BelongsToMany(() => ResumeHard, () => UserResumeHard)
+    resume_hard_id: ResumeHard[];
 }

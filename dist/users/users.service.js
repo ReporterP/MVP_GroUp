@@ -17,6 +17,8 @@ const common_1 = require("@nestjs/common");
 const sequelize_1 = require("@nestjs/sequelize");
 const users_model_1 = require("./models/users.model");
 const tags_user_model_1 = require("../tags_user/models/tags_user.model");
+const specialties_model_1 = require("../specialties/models/specialties.model");
+const resume_hard_model_1 = require("../resume_hard/models/resume_hard.model");
 let UsersService = class UsersService {
     constructor(userRepo) {
         this.userRepo = userRepo;
@@ -37,6 +39,13 @@ let UsersService = class UsersService {
                 id,
             },
             include: [tags_user_model_1.TagsUser] });
+        return oneUser;
+    }
+    async findOneUserForResume(id) {
+        const oneUser = await this.userRepo.findOne({ where: {
+                id,
+            },
+            include: [specialties_model_1.Specialties, resume_hard_model_1.ResumeHard] });
         return oneUser;
     }
     async findOne(telegram_id) {

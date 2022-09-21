@@ -4,6 +4,8 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './models/users.model';
 import { TagsUser } from '../tags_user/models/tags_user.model';
+import { Specialties } from '../specialties/models/specialties.model';
+import { ResumeHard } from '../resume_hard/models/resume_hard.model';
 
 @Injectable()
 export class UsersService {
@@ -27,6 +29,14 @@ export class UsersService {
       id,
     }, 
     include: [TagsUser]});
+    return oneUser;
+  }
+
+  async findOneUserForResume(id: number) {
+    const oneUser = await this.userRepo.findOne({where: {
+      id,
+    }, 
+    include: [Specialties, ResumeHard]});
     return oneUser;
   }
 
