@@ -103,7 +103,57 @@
         }
     }
     .roadmap {
+        border-radius: 10px;
+        background-color: #353b49;
+        color: #fff;
+        padding: 6px;
+        position: relative;
         
+        .flatButton {
+            position: absolute;
+            right: 15px;
+            bottom: 15px;
+            width: 30px;
+            height: 30px;
+            border-radius: 15px;
+            background-color: $active-color;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        table {
+            height: 30vh;
+            display: block;
+            overflow-y: auto;
+
+            &::-webkit-scrollbar {
+                display: none;
+            }
+            
+            tr {
+                height: 45px;
+                display: block;
+    
+                td {
+                    padding: 0 8px;
+                }
+                .date {
+                    font-size: 8pt;
+                    color: #b9b9b9;
+                }
+                .name {
+                    font-size: 12px;
+                }
+                .editButton {
+                    width: 15px;
+                    height: 15px;
+                }
+                img.roadmapPoint {
+                    height: 46.5px;
+                }
+            }
+        }
     }
 }
 
