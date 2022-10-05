@@ -35,3 +35,25 @@ p {
 .flexItemsCenter {
     align-items: center;
 }
+
+.voidButton {
+    background: none;
+    border: none;
+    color: #fff;
+}
+
+.greenButton {
+    padding: 4px 18px;
+    background: $active-color;
+    border: none;
+    border-radius: 5px;
+    color: #000;
+}
+
+.styledInput {
+    border-radius: 5px;
+    background: #353b49;
+    border: none;
+    color: #fff;
+    padding: 4px 7px;
+}
