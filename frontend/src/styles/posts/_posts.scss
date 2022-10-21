@@ -1,5 +1,9 @@
 .posts { 
-    padding: 70px 20px 9px 20px;
+    padding: 10px 20px 9px 20px;
+
+    &.withPaddingTop {
+        padding-top: 70px;
+    }
 }
 
 .card {
