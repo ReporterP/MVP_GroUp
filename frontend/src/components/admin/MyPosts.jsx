@@ -32,7 +32,9 @@ const MyPosts = () => {
     <div id='myPosts'>
       <h3>Мои посты</h3>
 
-      <Posts cards={adminPosts} withPaddingTop={false} />
+      <div className="scrollable">
+        <Posts cards={adminPosts} withPaddingTop={false} />
+      </div>
     </div>
   );
 }
