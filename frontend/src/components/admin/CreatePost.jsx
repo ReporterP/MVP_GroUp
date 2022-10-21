@@ -2,9 +2,9 @@ import React from 'react';
 
 const CreatePost = () => {
   return (
-    <div>
-      
-    </div>
+    <button id='createPostBtn' className='greenButton fullWidth'>
+      Создать пост +
+    </button>
   );
 }
 
