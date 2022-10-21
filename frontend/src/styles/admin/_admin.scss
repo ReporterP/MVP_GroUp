@@ -1,0 +1,53 @@
+#admin {
+    #createPostBtn {
+        font-size: 14px;
+        padding: 5px;
+        
+    }
+
+    #myPosts {
+        margin-top: 15px;
+
+        .scrollable {
+            margin-top: 5px;
+            height: 50vh;
+            overflow: auto;
+
+            &::-webkit-scrollbar {
+                display: block;
+                width: 5px;
+            }
+            &::-webkit-scrollbar-track {
+                background: $main-color;
+            }
+            &::-webkit-scrollbar-thumb {
+                background-color: $active-color;
+                border-radius: 5px;
+            }
+        }
+        
+        h3 {
+            color: white;
+        }
+    }
+    
+}
+
+.postCreationPopup {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    height: 100vh;
+    width: min($max-screen-width, 100vw);
+    margin-left: 50%;
+    transform: translate(-50%);
+    padding: 70px 0;
+    
+    z-index: 999;
+    
+    .content {
+        background: #353b49;
+        height: 100vh;
+    }
+}
