@@ -243,3 +243,150 @@
         }
     }
 }
+
+#resumeArea {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.editableAccordionsArea {
+    .accordionsTitle {
+        font-size: 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 5px;
+    }
+    
+    .accordions {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .accordionAddingBar {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+
+        .accordionAddingBtn {
+            margin-top: 8px;
+        }
+    }
+}
+
+.editableAccordionRow {
+    display: grid;
+    grid-template-columns: 1fr 10px 30px;
+    grid-template-rows: auto;
+
+    .editableAccordion {
+        grid-column-start: 1;
+        grid-column-end: 4;
+
+        padding: 7px 10px;
+        border-radius: 5px;
+        font-size: 13px;
+        display: grid;
+        grid-template-columns: 5px calc(100% - $skill-five-stars-width - 8px - 10px) calc($skill-five-stars-width + 8px);
+        grid-template-rows: auto auto;
+    
+        .accordionArrow {
+            img {
+                width: 5px;
+                height: 10px;
+                transition: .2s;
+            }
+        }
+    
+        .accordionText {
+            margin-left: 10px;
+            width: calc(100% - 20px);
+            padding-left: 2px;
+            padding-top: 1px;
+            padding-bottom: 1px;
+    
+            &:focus-visible {
+                outline: none;
+            }
+        }
+    
+        input.accordionText {
+            padding-top: 0;
+            padding-bottom: 0;
+            border: 1px solid black;
+            background: transparent;
+        }
+        
+        .description {
+            margin-top: 5px;
+            display: none;
+            grid-column-start: 2;
+            grid-column-end: 4;
+            margin-left: 10px;
+            
+            .accordionDescription {
+                font-size: 10px;
+                background: transparent;
+                padding-top: 1px;
+                padding-bottom: 1px;
+                width: calc(100% - 6px);
+                padding: 2px;
+            }
+    
+            textarea.accordionDescription {
+                padding-top: 0;
+                padding-bottom: 0;
+                border: 1px solid black;
+                resize: none;
+            }
+    
+            textarea:focus-visible {
+                outline: none;
+            }
+        }
+        
+        .stars {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+    
+            img {
+                width: $skill-star-size;
+                height: $skill-star-size;
+            }
+        }
+    
+        &.closed {
+            .accordionArrow img {
+                transform: rotate(90deg);
+            }
+    
+            .description {
+                display: block;
+            }
+        }
+    }
+
+    
+    .deleteBtn {
+        grid-column-start: 3;
+        grid-column-end: 4;
+
+        display: none;
+    }
+    
+    &.editing {
+        .editableAccordion {
+            grid-column-start: 1;
+            grid-column-end: 2;
+        }
+        
+        .deleteBtn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+}
