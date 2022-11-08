@@ -9,9 +9,9 @@ const AuthApi = () => {
     
     const navigate = useNavigate();
 
-    // const telegram_id = WebApp.initDataUnsafe.user?.id === undefined ? 0: WebApp.initDataUnsafe.user?.id 
+    const telegram_id = WebApp.initDataUnsafe.user?.id === undefined ? 0: WebApp.initDataUnsafe.user?.id 
 
-    const telegram_id = 1234
+    // const telegram_id = 1234
 
     const correct_auth = (userData) => {
         const cookies = new Cookies();
@@ -21,17 +21,17 @@ const AuthApi = () => {
 
     const auth = (id) => {
 
-        // const newUserData = {
-        //     telegram_id: id, 
-        //     telegram_name: WebApp.initDataUnsafe.user?.username, 
-        //     name: WebApp.initDataUnsafe.user?.first_name + " " + WebApp.initDataUnsafe.user?.last_name
-        // }
-
         const newUserData = {
             telegram_id: id, 
-            telegram_name: "@telegram", 
-            name: "telegram telegramovich"
+            telegram_name: WebApp.initDataUnsafe.user?.username, 
+            name: WebApp.initDataUnsafe.user?.first_name + " " + WebApp.initDataUnsafe.user?.last_name
         }
+
+        // const newUserData = {
+        //     telegram_id: id, 
+        //     telegram_name: "@telegram", 
+        //     name: "telegram telegramovich"
+        // }
         let data = new Api('api/auth/', newUserData).method('post')
         correct_auth(data)
     };

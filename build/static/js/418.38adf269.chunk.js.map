@@ -1,1 +1,0 @@
-{"version":3,"file":"static/js/418.38adf269.chunk.js","mappings":"qIAUA,UARe,WACb,OACE,mCAIH,C","sources":["components/profile/Resume.jsx"],"sourcesContent":["import React from 'react';\r\n\r\nconst Resume = () => {\r\n  return (\r\n    <div>\r\n      Resume\r\n    </div>\r\n  );\r\n}\r\n\r\nexport default Resume;\r\n"],"names":[],"sourceRoot":""}
