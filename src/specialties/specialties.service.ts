@@ -26,7 +26,7 @@ export class SpecialtiesService {
   async addNewSpecialties(user_id: number, createSpecialtyDto: CreateSpecialtyDto) {
 
     const nameSpec = createSpecialtyDto.name
-    const user = await this.usersService.findOneUserForTags(user_id);
+    const user = await this.usersService.findOneUserForResume(user_id);
 
     const name = await this.findOneByName(nameSpec)?
     await this.findOneByName(nameSpec)
@@ -38,7 +38,7 @@ export class SpecialtiesService {
   }
 
   async findSpecUser(user_id: number){
-    const user = await this.usersService.findOneUserForTags(user_id);
+    const user = await this.usersService.findOneUserForResume(user_id);
     return user.$get('specialties_id')
   }
 
@@ -61,7 +61,7 @@ export class SpecialtiesService {
     
     if (newSpec === '') {
       user.$remove('specialties_id', await this.findOneByName(oldSpec));
-      
+
     } else if (newSpec !== oldSpec) {
       user.$remove('specialties_id', await this.findOneByName(oldSpec));
       

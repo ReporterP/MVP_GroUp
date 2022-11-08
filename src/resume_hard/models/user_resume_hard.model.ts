@@ -11,7 +11,7 @@ interface UserResumeHardCreationAttr {
 @Table({tableName: "user_resume_hard", createdAt: false, updatedAt: false})
 export class UserResumeHard extends Model<UserResumeHard, UserResumeHardCreationAttr> {
 
-    @Column({type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true})
+    @Column({type: DataType.INTEGER ,unique: true, autoIncrement: true, primaryKey: true})
     id: number;
 
     @ForeignKey(() => User)

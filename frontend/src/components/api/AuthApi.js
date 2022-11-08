@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { WebApp } from "@grammyjs/web-app";
 import Cookies from 'universal-cookie';
+import { Api } from "./Api";
 
 const AuthApi = () => {
     
@@ -31,34 +32,22 @@ const AuthApi = () => {
             telegram_name: "@telegram", 
             name: "telegram telegramovich"
         }
-
-        axios.post('api/auth/', newUserData, {
-            headers: {
-                "Access-Control-Allow-Origin": "*",
-                'Content-Type': "application/json"
-            }
-        }).then(res => correct_auth(res.data)).catch(err=>console.log(err))
+        let data = new Api('api/auth/', newUserData).method('post')
+        correct_auth(data)
     };
 
     const auth_in_browser = () => {}
 
     const check_in_auth = () => {
-        axios.get('/api/auth/'+telegram_id, {
-            headers: {
-                "Access-Control-Allow-Origin": "*",
-                'Content-Type': "application/json"
-            }
-        }).then(res=>{
-            console.log(res.data)
-            if (res.data === "err") {
-                auth(telegram_id)
-            } else if (res.data === "enter_in_browser"){
-                auth_in_browser()
-            } else {
-                correct_auth(res.data)
-            }
-        }).catch(err => console.log(err))
-
+        let data = new Api('/api/auth/'+telegram_id).method('get')
+        console.log(data)
+        if (data === "err") {
+            auth(telegram_id)
+        } else if (data === "enter_in_browser"){
+            auth_in_browser()
+        } else {
+            correct_auth(data)
+        }
     }
     console.log(check_in_auth())
 

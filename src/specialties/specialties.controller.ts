@@ -32,7 +32,7 @@ export class SpecialtiesController {
     return this.specialtiesService.findOne(+id);
   }
 
-  @Patch(':user_id')
+  @Patch('user/:user_id')
   updateSpecUser(@Param('user_id') user_id: string, @Body() updateSpecialtyDto: UpdateSpecialtyDto) {
     return this.specialtiesService.updateSpecUser(+user_id, updateSpecialtyDto);
   }

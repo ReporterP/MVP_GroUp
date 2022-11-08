@@ -12,6 +12,16 @@ export class ResumeHardController {
     return this.resumeHardService.create(createResumeHardDto);
   }
 
+  @Post(':user_id')
+  addNewResumeHard(@Param('user_id') user_id: string, @Body() createResumeHardDto: CreateResumeHardDto) {
+    return this.resumeHardService.addNewResumeHard(+user_id, createResumeHardDto);
+  }
+
+  @Get(':user_id')
+  findHardUser(@Param('user_id') user_id: string) {
+    return this.resumeHardService.findHardUser(+user_id);
+  }
+
   @Get()
   findAll() {
     return this.resumeHardService.findAll();
@@ -20,6 +30,11 @@ export class ResumeHardController {
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.resumeHardService.findOne(+id);
+  }
+
+  @Patch('user/:user_id')
+  updateHardUser(@Param('user_id') user_id: string, @Body() updateResumeHardDto: UpdateResumeHardDto) {
+    return this.resumeHardService.updateHardUser(+user_id, updateResumeHardDto);
   }
 
   @Patch(':id')
