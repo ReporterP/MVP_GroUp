@@ -2,37 +2,73 @@ import { ResumeWorkExp } from './models/resume_work_exp.model';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { CreateResumeWorkExpDto } from './dto/create-resume_work_exp.dto';
-import { UpdateResumeWorkExpDto } from './dto/update-resume_work_exp.dto';
+import { UsersService } from '../users/users.service';
 
 @Injectable()
 export class ResumeWorkExpService {
 
-  constructor(@InjectModel(ResumeWorkExp) private ResumeWorkExpRepo: typeof ResumeWorkExp) {};
+  constructor(@InjectModel(ResumeWorkExp) private ResumeWorkExpRepo: typeof ResumeWorkExp,
+    private usersService: UsersService) { };
 
   async create(createResumeWorkExpDto: CreateResumeWorkExpDto) {
     const resumeWorkExp = await this.ResumeWorkExpRepo.create(createResumeWorkExpDto)
     return resumeWorkExp;
   }
 
-  async findAll() {
-    const resumeWorkExp = await this.ResumeWorkExpRepo.findAll()
-    return resumeWorkExp;
-  }
+  async findOneByParams(ResumeWorkExpParams: any) {
 
-  async findOne(id: number) {
-    const resumeWorkExp = await this.ResumeWorkExpRepo.findOne({where: {
-      id,
-    }})
-    return resumeWorkExp;
-  }
+    const profession = ResumeWorkExpParams.profession;
+    const work_time = ResumeWorkExpParams.work_time;
+    const description = ResumeWorkExpParams.description;
 
-  async update(id: number, updateResumeWorkExpDto: UpdateResumeWorkExpDto) {
-    const resumeWorkExp = await this.ResumeWorkExpRepo.update({...updateResumeWorkExpDto}, {where: {id}});
+    const resumeWorkExp = await this.ResumeWorkExpRepo.findOne({
+      where: {
+        profession,
+        work_time,
+        description,
+      }
+    })
     return resumeWorkExp;
-  }
+  };
 
-  async remove(id: number) {
-    const resumeWorkExp = await this.ResumeWorkExpRepo.destroy({where: {id}});
-    return resumeWorkExp;
-  }
+  async addNewRHforUser(user: any, newResumeWorkExp: Array<CreateResumeWorkExpDto>) {
+
+    // add new resumeWorkExp for user and create new resumeWorkExp
+
+    newResumeWorkExp.map(async e => {
+      user.$add('resume_work_exp_id', await this.findOneByParams(e) ?
+        await this.findOneByParams(e)
+        : await this.create(e));
+    });
+  };
+
+  async deleteOldRHforUser(user: any, newResumeWorkExp: Array<CreateResumeWorkExpDto>, oldResumeWorkExp: any) {
+
+    // delete old resumeWorkExp for user
+
+    oldResumeWorkExp.map(async e => {
+      newResumeWorkExp
+        .map(el => JSON.stringify(el))
+        .indexOf(
+          JSON.stringify(e)) == -1 ?
+        user.$remove('resume_work_exp_id', await this.findOneByParams(e))
+        : 0;
+    });
+  };
+
+
+  async addNewResumeWorkExp(user_id: number, createResumeWorkExpDto: Array<CreateResumeWorkExpDto>) {
+
+    let user = await this.usersService.findOneUserForResume(user_id);
+    this.deleteOldRHforUser(user, createResumeWorkExpDto, user.resume_work_exp_id);
+    this.addNewRHforUser(user, createResumeWorkExpDto);
+
+    return createResumeWorkExpDto;
+
+  };
+
+  async findWorkExpUser(user_id: number) {
+    const user = await this.usersService.findOneUserForResume(user_id);
+    return user.$get('resume_work_exp_id')
+  };
 }

@@ -1,5 +1,5 @@
 export class CreateResumeHardDto {
-    readonly soft;
+    readonly hard;
     readonly description;
     readonly level_edu;
 }

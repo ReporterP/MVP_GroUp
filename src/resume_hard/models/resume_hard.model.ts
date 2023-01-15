@@ -3,7 +3,7 @@ import { User } from '../../users/models/users.model';
 import { UserResumeHard } from './user_resume_hard.model';
 
 interface ResumeHardCreationAttr {
-    soft: string,
+    hard: string,
     description: string,
     level_edu: number,
 }
@@ -15,7 +15,7 @@ export class ResumeHard extends Model<ResumeHard, ResumeHardCreationAttr> {
     id: number;
 
     @Column({type: DataType.STRING, allowNull: false})
-    soft: string;
+    hard: string;
 
     @Column({type: DataType.STRING})
     description: string;

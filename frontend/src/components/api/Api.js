@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+
+
 export class Api {
     constructor(url, data = {}) {
         this.url = url;
@@ -7,23 +9,27 @@ export class Api {
         this.h = { headers: { "Access-Control-Allow-Origin": "*", 'Content-Type': "application/json" } };
     }
     method(method) {
-        let answer;
-        switch (method) {
-            case 'post':
-                axios.post(this.url, this.data, this.h).then(res => answer = res.data).catch(err => console.log(err));
-                break;
-            case 'get':
-                axios.get(this.url, this.h).then(res => answer = res.data).catch(err => console.log(err));
-                break;
-            case 'patch':
-                axios.patch(this.url, this.data, this.h).then(res => answer = res.data).catch(err => console.log(err));
-                break;
-            case 'delete':
-                axios.delete(this.url, this.data, this.h).then(res => answer = res.data).catch(err => console.log(err));
-                break;
-            default:
-                answer = "Это шо такое";
+        var answer;
+
+        if(method === 'post' || method === 'delete' || method === 'patch'){
+            axios({
+                method: method,
+                url: this.url,
+                data: this.data,
+                headers: this.h
+            })
+            .then(res => answer = res.data)
+            .catch(err => console.log(err));
+        }else if (method === 'get') {
+            axios({
+                method: method,
+                url: this.url,
+                headers: this.h,
+            })
+            .then(res => answer = res.data).catch(err => console.log(err));
+            console.log(answer);
         }
+
         return answer;
-    }
+    }   
 }

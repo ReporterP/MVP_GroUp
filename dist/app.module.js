@@ -35,6 +35,8 @@ const posts_tags_model_1 = require("./tags_posts/models/posts_tags.model");
 const user_tags_model_1 = require("./tags_user/models/user_tags.model");
 const user_specialties_model_1 = require("./specialties/models/user_specialties.model");
 const user_resume_hard_model_1 = require("./resume_hard/models/user_resume_hard.model");
+const user_resume_soft_model_1 = require("./resume_soft/models/user_resume_soft.model");
+const user_resume_work_exp_model_1 = require("./resume_work_exp/models/user_resume_work_exp.model");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -45,19 +47,14 @@ AppModule = __decorate([
             }),
             sequelize_1.SequelizeModule.forRoot({
                 dialect: 'postgres',
-                dialectOptions: {
-                    ssl: {
-                        rejectUnauthorized: false
-                    }
-                },
                 host: process.env.DATABASE_HOST,
                 port: Number(process.env.DATABASE_PORT),
                 username: process.env.DATABASE_USERNAME,
                 password: process.env.DATABASE_PASSWORD,
                 database: process.env.DATABASE_NAME,
-                models: [users_model_1.User, posts_model_1.Post, tags_user_model_1.TagsUser, user_tags_model_1.UserTags, tags_posts_model_1.TagsPost, posts_tags_model_1.PostsTags, specialties_model_1.Specialties, user_specialties_model_1.UserSpecialties, resume_work_exp_model_1.ResumeWorkExp, resume_soft_model_1.ResumeSoft, resume_hard_model_1.ResumeHard, user_resume_hard_model_1.UserResumeHard, author_post_model_1.AuthorPost, user_post_liked_model_1.UserPostLiked],
+                models: [users_model_1.User, posts_model_1.Post, tags_user_model_1.TagsUser, user_tags_model_1.UserTags, tags_posts_model_1.TagsPost, posts_tags_model_1.PostsTags, specialties_model_1.Specialties, user_specialties_model_1.UserSpecialties, resume_work_exp_model_1.ResumeWorkExp, user_resume_work_exp_model_1.UserResumeWorkExp, resume_soft_model_1.ResumeSoft, user_resume_soft_model_1.UserResumeSoft, resume_hard_model_1.ResumeHard, user_resume_hard_model_1.UserResumeHard, author_post_model_1.AuthorPost, user_post_liked_model_1.UserPostLiked],
                 autoLoadModels: true,
-                synchronize: true
+                synchronize: true,
             }),
             serve_static_1.ServeStaticModule.forRoot({
                 rootPath: (0, path_1.join)(__dirname, '..', 'build'),

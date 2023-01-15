@@ -8,6 +8,10 @@ import { Specialties } from '../../specialties/models/specialties.model';
 import { UserSpecialties } from '../../specialties/models/user_specialties.model';
 import { ResumeHard } from '../../resume_hard/models/resume_hard.model';
 import { UserResumeHard } from '../../resume_hard/models/user_resume_hard.model';
+import { ResumeSoft } from '../../resume_soft/models/resume_soft.model';
+import { UserResumeSoft } from '../../resume_soft/models/user_resume_soft.model';
+import { ResumeWorkExp } from '../../resume_work_exp/models/resume_work_exp.model';
+import { UserResumeWorkExp } from '../../resume_work_exp/models/user_resume_work_exp.model';
 
 interface UserCreationAttrs {
     telegram_id: string;
@@ -63,4 +67,10 @@ export class User extends Model<User, UserCreationAttrs> {
 
     @BelongsToMany(() => ResumeHard, () => UserResumeHard)
     resume_hard_id: ResumeHard[];
+
+    @BelongsToMany(() => ResumeSoft, () => UserResumeSoft)
+    resume_soft_id: ResumeSoft[];
+
+    @BelongsToMany(() => ResumeWorkExp, () => UserResumeWorkExp)
+    resume_work_exp_id: ResumeWorkExp[];
 }

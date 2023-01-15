@@ -7,28 +7,13 @@ import { UpdateResumeSoftDto } from './dto/update-resume_soft.dto';
 export class ResumeSoftController {
   constructor(private readonly resumeSoftService: ResumeSoftService) {}
 
-  @Post()
-  create(@Body() createResumeSoftDto: CreateResumeSoftDto) {
-    return this.resumeSoftService.create(createResumeSoftDto);
+  @Post('user/:user_id')
+  addNewResumeHard(@Param('user_id') user_id: string, @Body() createResumeHardDto: Array<CreateResumeSoftDto>) {
+    return this.resumeSoftService.addNewResumeSoft(+user_id, createResumeHardDto);
   }
 
-  @Get()
-  findAll() {
-    return this.resumeSoftService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.resumeSoftService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateResumeSoftDto: UpdateResumeSoftDto) {
-    return this.resumeSoftService.update(+id, updateResumeSoftDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.resumeSoftService.remove(+id);
+  @Get('user/:user_id')
+  findHardUser(@Param('user_id') user_id: string) {
+    return this.resumeSoftService.findSoftUser(+user_id);
   }
 }

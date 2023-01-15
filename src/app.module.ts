@@ -26,6 +26,8 @@ import { PostsTags } from './tags_posts/models/posts_tags.model';
 import { UserTags } from './tags_user/models/user_tags.model';
 import { UserSpecialties } from './specialties/models/user_specialties.model';
 import { UserResumeHard } from './resume_hard/models/user_resume_hard.model';
+import { UserResumeSoft } from './resume_soft/models/user_resume_soft.model';
+import { UserResumeWorkExp } from './resume_work_exp/models/user_resume_work_exp.model';
 
 
 @Module({
@@ -35,19 +37,19 @@ import { UserResumeHard } from './resume_hard/models/user_resume_hard.model';
     }),
     SequelizeModule.forRoot({
       dialect: 'postgres',
-      dialectOptions: {
-        ssl: {
-          rejectUnauthorized: false
-      }
-      },
+      // dialectOptions: {
+      //   ssl: {
+      //     rejectUnauthorized: false
+      // }
+      // },
       host: process.env.DATABASE_HOST,
       port: Number(process.env.DATABASE_PORT),
       username: process.env.DATABASE_USERNAME,
       password: process.env.DATABASE_PASSWORD,
       database: process.env.DATABASE_NAME,
-      models: [User, Post, TagsUser, UserTags ,TagsPost, PostsTags, Specialties, UserSpecialties, ResumeWorkExp, ResumeSoft, ResumeHard, UserResumeHard , AuthorPost, UserPostLiked],
+      models: [User, Post, TagsUser, UserTags ,TagsPost, PostsTags, Specialties, UserSpecialties, ResumeWorkExp, UserResumeWorkExp ,ResumeSoft, UserResumeSoft , ResumeHard, UserResumeHard , AuthorPost, UserPostLiked],
       autoLoadModels: true,
-      synchronize: true
+      synchronize: true,
     }),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'build'),
