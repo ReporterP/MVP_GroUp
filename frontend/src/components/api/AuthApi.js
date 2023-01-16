@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { WebApp } from "@grammyjs/web-app";
@@ -32,11 +32,15 @@ const AuthApi = () => {
             telegram_name: "@telegram", 
             name: "telegram telegramovich"
         }
-        let data = new Api('api/auth/', newUserData).method('post')
-        correct_auth(data)
+        let data = new Api('api/auth', newUserData).method('post')
+        console.log(data);
+        correct_auth(data);
     };
 
-    const auth_in_browser = () => {}
+    const auth_in_browser = () => {
+
+
+    }
 
     const check_in_auth = () => {
         let data = new Api('/api/auth/'+telegram_id).method('get')
@@ -50,6 +54,8 @@ const AuthApi = () => {
         }
     }
     console.log(check_in_auth())
+
+    check_in_auth();
 
     return <></>
 }

@@ -1,15 +1,17 @@
 import axios from 'axios';
 
-
+// TODO: delete api.js and create split file for work api wtih axios
 
 export class Api {
-    constructor(url, data = {}) {
+    constructor(url, data) {
         this.url = url;
         this.data = data;
         this.h = { headers: { "Access-Control-Allow-Origin": "*", 'Content-Type': "application/json" } };
     }
     method(method) {
-        var answer;
+        let resAns;
+
+        let answer = ans => resAns = ans;
 
         if(method === 'post' || method === 'delete' || method === 'patch'){
             axios({
@@ -18,7 +20,7 @@ export class Api {
                 data: this.data,
                 headers: this.h
             })
-            .then(res => answer = res.data)
+            .then(res => res.data)
             .catch(err => console.log(err));
         }else if (method === 'get') {
             axios({
@@ -26,10 +28,9 @@ export class Api {
                 url: this.url,
                 headers: this.h,
             })
-            .then(res => answer = res.data).catch(err => console.log(err));
-            console.log(answer);
+            .then(res => answer(res.data)).catch(err => console.log(err));
         }
 
-        return answer;
+        return resAns;
     }   
 }
