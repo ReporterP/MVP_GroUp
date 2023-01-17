@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import {DocumentBuilder, SwaggerModule} from '@nestjs/swagger'
 
 
+// Hello comment :)
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {cors: true});
 
