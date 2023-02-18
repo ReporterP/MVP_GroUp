@@ -3,7 +3,7 @@ import backArrow from '../../img/Back Arrow.svg';
 import {Animated} from "react-animated-css";
 
 const ViewPost = props => {
-  var statusStyle = {backgroundColor: props.status[0]}
+  var typeStyle = {backgroundColor: props.type==="Мероприятие"?"#24D756":""}
   var tagStyle = {}
 
   var cardStyle = {
@@ -23,24 +23,24 @@ const ViewPost = props => {
           <button className='backButton' onClick={()=>{props.open(false)}}>
             <img src={backArrow} alt="back arrow" />
           </button>
-          <div className='status' style={statusStyle}>{props.status[1]}</div>
+          <div className='status' style={typeStyle}>{props.type}</div>
           <div className='cardPrew' style={cardPrewStyle}>
             <img src={props.picture} alt="" />
           </div>
           <div className='viewCardContent'>
             <div className='viewCardText cardText'>
-              <h5>{props.name}</h5>
+              <h5>{props.title}</h5>
               <div className='tags'>
                 {
-                  props.tags.map(e=>{
+                  props.tag_id.map(e=>{
                     tagStyle = {backgroundColor: e[1]}
                     return <div className='tag' style={tagStyle}>{e[0]}</div>
                   })
                 }
               </div>
-              <p>{props.description}</p>
+              <p>{props.text}</p>
               <div className='viewCardButtons'>
-                <button className='viewCheck'>Я приду!</button>
+                <button className='viewCheck' onClick={props.funcLike()}>{props.isLike?"Я приду!":"Записаться"}</button>
               </div>
             </div>
           </div>
