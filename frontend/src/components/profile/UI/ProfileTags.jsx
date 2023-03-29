@@ -1,24 +1,23 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+import Cookies from 'universal-cookie';
 
-const ProfileTags = () => {
-    var tags = {tags:[
-        {color: "#F272DE", name: "Тег"},
-        {color: "#68B9E6", name: "ТегТегТег"},
-        {color: "#68E68B", name: "Тег"},
-        {color: "#A484FF", name: "ТегТегТегТегТегТегТегТег"},
-        {color: "#F272DE", name: "Тег"},
-        {color: "#68B9E6", name: "Тег"},
-        {color: "#68E68B", name: "ТегТегТегТег"},
-        {color: "#A484FF", name: "Тег"},
-    ]}
+const ProfileTags = props => {
+
+    var cookie = new Cookies();
+    const cookiesUser = cookie.get("user")
+
+    const [Tags, setTags] = useState([]);
+
+    const getTags = () => {
+        fetch('/api/tags-user/user/' + cookiesUser.id)
+        .then(response => response.json())
+        .then(data => setTags(data))
+        .catch(err => console.log(err))}
+
+    useEffect(getTags, [props.update])
 
     return (
-        <div className='tags'>
-            {
-                tags.tags.map(e=><div style={{backgroundColor: e.color}}>{e.name}</div>)
-            }
-            <div className='addTag'>Добавить тег</div>
-        </div>
+        <div className='tags'>{Tags.map(e=><div key={e.id} style={{backgroundColor: e.color}}>{e.tag}</div>)}</div>
     );
 }
 

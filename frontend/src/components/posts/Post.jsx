@@ -1,74 +1,62 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import ViewPost from './ViewPost';
 import Cookies from 'universal-cookie';
-import axios from 'axios';
 
 const Post = props => {
-  var typeStyle = {backgroundColor: props.type==="Мероприятие"?"#24D756":""}
+  const id = props.id
+  var typeStyle = {backgroundColor: props.type==="Мероприятие"?"#24D756"
+  :props.type==="Вакансия"?"#7C91FF"
+  :props.type==="Новость"?"#FFBD70"
+  :"#B9B9B9"}
   var tagStyle = {}
-
   const [isOpen, setIsOpen] = useState(false)
-  const [postLike, setPostLike] = useState([]);
-  const [likeId, setLikeId] = useState(postLike.indexOf(props.id) !== -1)
-  const [isLike, setIsLike] = useState(likeId?"Записан":"Записаться")
+  const [isLike, setIsLike] = useState(props.like.length !== 0?"Записан":"Записаться")
 
+  const cookies = useMemo(() => new Cookies(), []);
 
-  const cookies = new Cookies();
+  const dataUserID = useMemo(() => cookies.get("user").id, [cookies])
 
-  useEffect(() => {
-    axios.get('http://185.12.94.221:5000/api/users/likeposts/' + cookies.get("user").id, {
-      headers: { 
-          "Access-Control-Allow-Origin": "*", 
-          'Content-Type': "application/json" 
-      }}).then(res => setPostLike(res.data.map(e=>e.id)))
-      .catch(err => console.log(err));
-  }, []);
+  const showLike = async () => {
+    try {
+      const result = await fetch('/api/users/likeposts/' + dataUserID) 
+      const data = await result.json()
+      setIsLike(data.map(e=>e.id).indexOf(id) !== -1 
+      ? "Записан" 
+      : "Записаться");
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
-
-  function funcLike () {
-      console.log(likeId)
+  const funcLike = () => {
+      console.log(isLike)
       var data = {
-          "user_like_id": cookies.get("user").id,
-          "post_like_id": props.id,
+          "user_like_id": dataUserID,
+          "post_like_id": id,
       }
   
-      likeId? axios.delete("http://185.12.94.221:5000/api/posts/like",  {
-          data: data,
+      isLike === "Записан" ? 
+      fetch("http://group.ithub.software:5000/api/posts/like", {
+          method: "DELETE",
           headers: { 
               "Access-Control-Allow-Origin": "*", 
-              'Content-Type': "application/json" 
-      }}).then(res => console.log(res.data)).catch(err => console.log(err))
+              'Content-Type': "application/json; charset=UTF-8"},
+          body: JSON.stringify(data)})
+      .then(() => showLike())
+      .catch(err => console.log(err))
 
-      :axios.post("http://185.12.94.221:5000/api/posts/like", data, {
+      :fetch("http://group.ithub.software:5000/api/posts/like", {
+          method: "POST",
           headers: { 
               "Access-Control-Allow-Origin": "*", 
-              'Content-Type': "application/json" 
-          }}).then(res => console.log(res.data)).catch(err => console.log(err));
-
-      axios.get('http://185.12.94.221:5000/api/users/likeposts/' + cookies.get("user").id, {
-          headers: { 
-              "Access-Control-Allow-Origin": "*", 
-              'Content-Type': "application/json" 
-          }}).then(res => setPostLike(res.data.map(e=>e.id)))
-          .catch(err => console.log(err));
-
-      console.log(postLike);
-      
-      setLikeId(postLike.indexOf(props.id) !== -1);
-      console.log(likeId)
-      setIsLike(likeId?"Записан":"Записаться");
+              'Content-Type': "application/json"}, 
+          body: JSON.stringify(data)})
+      .then(() => showLike())
+      .catch(err => console.log(err));
       }
 
-
-
-  // var cardPrewStyle = {
-  //   height: props.picture===""?0:"188px"
-  // }
-
-
   return (
-    <>
-      <div className='card' key={props.id}>
+    <><div className='card'>
       <div className='status' style={typeStyle}>{props.type}</div>
         <div className='cardPrew'>
           <img src={props.picture} alt="" />
@@ -81,7 +69,7 @@ const Post = props => {
                 props.tag_id.map(e=>{
                 tagStyle = {backgroundColor: e[1]}
                 return <div className='tag' style={tagStyle}>{e[0]}</div>
-              })
+              }) 
               }
             </div>
             <p>{props.text.substring(0, 145) + '...'}</p>
@@ -101,7 +89,7 @@ const Post = props => {
         tag_id={props.tag_id} 
         text={props.text}
         isLike={isLike}
-        funcLike={props.funcLike} />
+        funcLike={funcLike} />
       }
     </>    
   );

@@ -4,7 +4,7 @@ module.exports = function(app) {
   app.use(
     '/api',
     createProxyMiddleware({
-      target: 'http://185.12.94.221:5000/',
+      target: 'http://group.ithub.software:5000',
       changeOrigin: true,
     })
   );

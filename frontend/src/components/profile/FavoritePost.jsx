@@ -1,37 +1,46 @@
-import React from 'react';
-import PostImage from '../../img/PostImage.png'
+import React, { useState, useEffect, useMemo } from 'react';
+import Cookies from 'universal-cookie';
 import Posts from '../posts/Posts';
 
 const FavoritePost = () => {
-  // TODO: Fetch data from DB to `favPosts`
-  /* Fake data */
-  let favPosts = [];
-  for (let i = 0; i < 4; i++) {
-      favPosts.push(
-          {
-              status: ['#24D756', "Мероприятие"],
-              picture: Math.random() < 0.5 ? PostImage : '',
-              name: `Мероприятие №${i+1} длинное название`,
-              tags: [
-                  ["онлайн", '#E6D268'],
-                  ["JavaScript", '#68E68B'],
-                  ["онлайн", '#E6D268'],
-                  ["JavaScript", '#68E68B'],
-                  ["онлайн", '#E6D268'],
-                  ["JavaScript", '#68E68B'],
-                  ["онлайн", '#E6D268'],
-                  ["JavaScript", '#68E68B']
-              ],
-              description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum."
-          }
-      )
+
+  const [postsInfo, setPostsInfo] = useState([]);
+  const [postLike, setPostLike] = useState([]);
+
+  const cookies = useMemo(() => new Cookies(), []);
+  const dataUserID = useMemo(() => cookies.get("user").id, [cookies])
+
+  const showLike = () => {
+    fetch('/api/users/likeposts/' + dataUserID)
+      .then(response => response.json())
+      .then(data => {
+        data = data.map(e => e.id);
+        showInfo(data)
+        setPostLike(data)
+      })
+      .catch(err => console.log(err))
   }
-  /* Fake data */
+
+  const showInfo = likes => {
+    fetch('api/posts/')
+      .then(response => response.json())
+      .then(data => {
+        data = data.filter(e => likes.indexOf(e.id) * 1 !== -1);
+        setPostsInfo(data)
+      })
+      .catch(err => setPostsInfo([{
+        type: "Ошибка",
+        picture: '',
+        title: `ошибка загрузки постов`,
+        tag_id: [],
+        text: ""
+      }]))
+  }
+
+  useEffect(showLike, []);
 
   return (
-    <div>
-      <Posts cards={favPosts} withPaddingTop={false} />
-    </div>
+    <><Posts cards={postsInfo} likes={postLike} withPaddingTop={false} /></>
   );
 }
 

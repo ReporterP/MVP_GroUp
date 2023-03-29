@@ -61,7 +61,9 @@ export class UsersService {
 
   async update(id: number, updateUserDto: UpdateUserDto) {
     const user = await this.userRepo.update({...updateUserDto}, {where: {id}});
-    return user;
+    return await this.userRepo.findOne({where: {
+      id,
+    }});
   }
 
 }

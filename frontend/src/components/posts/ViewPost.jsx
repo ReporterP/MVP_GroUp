@@ -3,7 +3,10 @@ import backArrow from '../../img/Back Arrow.svg';
 import {Animated} from "react-animated-css";
 
 const ViewPost = props => {
-  var typeStyle = {backgroundColor: props.type==="Мероприятие"?"#24D756":""}
+  var typeStyle = {backgroundColor: props.type==="Мероприятие"?"#24D756"
+  :props.type==="Вакансия"?"#7C91FF"
+  :props.type==="Новость"?"#FFBD70"
+  :"#B9B9B9"}
   var tagStyle = {}
 
   var cardStyle = {
@@ -40,7 +43,7 @@ const ViewPost = props => {
               </div>
               <p>{props.text}</p>
               <div className='viewCardButtons'>
-                <button className='viewCheck' onClick={props.funcLike()}>{props.isLike?"Я приду!":"Записаться"}</button>
+                <button className='viewCheck' onClick={props.funcLike}>{props.isLike}</button>
               </div>
             </div>
           </div>

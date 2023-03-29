@@ -15,7 +15,7 @@ const Personal = () => {
         <h6>Интересы</h6>
         <img src={EditButton} alt='edit button' onClick={()=>{setTagsPopupOpened(true)}} />
       </div>
-      <ProfileTags/>
+      <ProfileTags update={tagsPopupOpened}/>
       <h6>Роадмап</h6>
       <Roadmap/>
 

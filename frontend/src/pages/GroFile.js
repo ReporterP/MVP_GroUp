@@ -1,8 +1,8 @@
-import React, {useState, lazy, Suspense, useEffect} from 'react';
+import React, { useState, lazy, Suspense, useEffect, useMemo } from 'react';
 import Footer from '../components/main/Footer';
 import Loading from '../components/main/UI/Loading';
 import Header from "../components/main/Header";
-import axios from 'axios';
+import Cookies from 'universal-cookie';
 
 const Posts = lazy(() => import('../components/posts/Posts'));
 const Profile = lazy(() => import('./Profile'));
@@ -12,13 +12,26 @@ const GroFile = () => {
     const [isProfile, setIsProfile] = useState(false);
     const [isPosts, setisPosts] = useState(true);
     const [postsInfo, setPostsInfo] = useState([]);
+    const [postLike, setPostLike] = useState([]);
 
-    useEffect(() => {
-        axios.get('api/posts/', {
-            headers: { 
-                "Access-Control-Allow-Origin": "*", 
-                'Content-Type': "application/json" 
-            }}).then(res => setPostsInfo(res.data))
+    const cookies = useMemo(() => new Cookies(), []);
+    const dataUserID = useMemo(() => cookies.get("user").id, [cookies])
+
+    const showLike = () => {
+        fetch('/api/users/likeposts/' + dataUserID)
+            .then(response => response.json())
+            .then(data => {
+                data = data.map(e => e.id);
+                setPostLike(data);
+                showInfo()
+            })
+            .catch(err => console.log(err))
+    }
+
+    const showInfo = () => {
+        fetch('api/posts/')
+            .then(response => response.json())
+            .then(data => setPostsInfo(data))
             .catch(err => setPostsInfo([{
                 type: "Ошибка",
                 picture: '',
@@ -26,16 +39,15 @@ const GroFile = () => {
                 tag_id: [],
                 text: ""
             }]))
-    }, []);
+    }
+
+    useEffect(showLike, []);
 
     return (
-        <div>
-            <Header post={isPosts}/>
-                {isPosts && <Suspense fallback={<Loading/>}><Posts cards={postsInfo} withPaddingTop={true} /></Suspense>}
-                {isProfile && <Suspense fallback={<Loading/>}><Profile /></Suspense>}
-            <Footer profile={setIsProfile} post={setisPosts}/>
-        </div>
-    );
+        <><Header post={isPosts} />
+            {isPosts && <Suspense fallback={<Loading />}><Posts cards={postsInfo} likes={postLike} withPaddingTop={true} /></Suspense>}
+            {isProfile && <Suspense fallback={<Loading />}><Profile /></Suspense>}
+            <Footer profile={setIsProfile} post={setisPosts} /></>);
 }
 
 export default GroFile;

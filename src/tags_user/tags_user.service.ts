@@ -83,6 +83,7 @@ export class TagsUserService {
       await user.$remove('tag_id', tag):0
     })
 
+    return user.$get('tag_id')
   }
 
   async findOne(id: number) {

@@ -17,7 +17,7 @@ const EditableAccordionsArea = (props) => {
     setAccordsState(accordsState.concat(
       {
         title: '',
-        starsCount: 0,
+        level_edu: 0,
         description: ''
       }
     ))
@@ -34,7 +34,7 @@ const EditableAccordionsArea = (props) => {
 
         <div className="accordions">
           {accordsState.map(accord => <>
-            <EditableAccordion color={color} text={accord.text} starsCount={accord.starsCount}>
+            <EditableAccordion color={color} hard={accord.hard} level_edu={accord.level_edu}>
               {accord.description}
             </EditableAccordion>
           </>)}
