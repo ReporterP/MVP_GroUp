@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import ViewPost from './ViewPost';
 import Cookies from 'universal-cookie';
 
@@ -16,9 +16,9 @@ const Post = props => {
 
   const dataUserID = useMemo(() => cookies.get("user").id, [cookies])
 
-  const showLike = async () => {
+  const showLike =  async () => {
     try {
-      const result = await fetch('/api/users/likeposts/' + dataUserID) 
+      const result = await fetch('https://group.ithub.software:5000/api/users/likeposts/' + dataUserID) 
       const data = await result.json()
       setIsLike(data.map(e=>e.id).indexOf(id) !== -1 
       ? "Записан" 
@@ -36,16 +36,16 @@ const Post = props => {
       }
   
       isLike === "Записан" ? 
-      fetch("http://group.ithub.software:5000/api/posts/like", {
+      fetch("https://group.ithub.software:5000/api/posts/like", {
           method: "DELETE",
           headers: { 
               "Access-Control-Allow-Origin": "*", 
-              'Content-Type': "application/json; charset=UTF-8"},
+              'Content-Type': "application/json"},
           body: JSON.stringify(data)})
       .then(() => showLike())
       .catch(err => console.log(err))
 
-      :fetch("http://group.ithub.software:5000/api/posts/like", {
+      :fetch("https://group.ithub.software:5000/api/posts/like", {
           method: "POST",
           headers: { 
               "Access-Control-Allow-Origin": "*", 
@@ -54,6 +54,8 @@ const Post = props => {
       .then(() => showLike())
       .catch(err => console.log(err));
       }
+
+    // useEffect(showLike, [funcLike]);
 
   return (
     <><div className='card'>

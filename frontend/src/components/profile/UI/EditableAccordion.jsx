@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import AccordionArrow from '../../../img/accordionArrow.svg';
 import starFilled from '../../../img/starFilled.png'
 import starOutlined from '../../../img/starOutlined.png'
@@ -13,17 +13,14 @@ function autoHeight(e) {  /* javascript */
 const range = (size) =>
   [...Array(size).keys()];
 
-const SkillAccordion = (props) => {
-  const color       = props.color
-  const text        = props.text
-  const starsCount  = props.starsCount
-    const maxStars  = 5
-  const description = props.children
-  const mode        = React.useContext(ModeContext)
+const SkillAccordion = props => {
+  const maxStars = 5
+  const mode     = React.useContext(ModeContext)
+  const type     = props.type
 
-  const [textState, setTextState] = useState(text)
-  const [descriptionState, setDescriptionState] = useState(description)
-  const [starsCountState, setStarsCountState] = useState(starsCount)
+  const [textState, setTextState] = useState(props.text)
+  const [descriptionState, setDescriptionState] = useState(props.children)
+  const [starsCountState, setStarsCountState] = useState(props.starsCount)
   const [isClosed, setIsClosed] = React.useState(true)
   
   const isClosedClass = () => isClosed ? '' : ' closed'
@@ -39,11 +36,41 @@ const SkillAccordion = (props) => {
     setStarsCountState(x+1)
   }
 
+  useEffect(() => {
+    if (type === "hard"){
+      props.setNewAccord(props.newAccord?.map(e=>e.id*1 === props.id*1 ?e = {
+        id: props.id,
+        hard: textState,
+        level_edu: starsCountState,
+        description: descriptionState
+      }:e = e)
+    )
+    }
+    else if (type === "soft"){
+      props.setNewAccord(props.newAccord?.map(e=>e.id*1 === props.id*1 ?e = {
+        id: props.id,
+        hard: textState,
+        level_edu: starsCountState,
+        description: descriptionState
+        }:e = e)
+      )
+    }
+    else if (type === "workExp"){
+      props.setNewAccord(props.newAccord?.map(e=>e.id*1 === props.id*1 ?e = {
+        id: props.id,
+        hard: textState,
+        level_edu: starsCountState,
+        description: descriptionState
+        }:e = e)
+      )
+    }
+  }, [descriptionState, starsCountState, textState]);
+
   return (
     <div className={"editableAccordionRow" + isEditingClass()}>
       <div onClick={() => setIsClosed(!isClosed && !mode)}
           className={'editableAccordion' + isClosedClass()}
-          style={{backgroundColor: color}}>
+          style={{backgroundColor: props.color}}>
         
         <span className='accordionArrow'>
           <img src={AccordionArrow} />
@@ -83,7 +110,9 @@ const SkillAccordion = (props) => {
       
       <div className="deleteBtn">
         {!mode ? '' :
-                <img src={TrashIcon} alt="кнопка удаления" />
+        <button>
+            <img src={TrashIcon} alt="кнопка удаления" />
+        </button>
               }
       </div>
     </div>

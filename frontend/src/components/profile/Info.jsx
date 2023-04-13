@@ -14,13 +14,12 @@ const Info = () => {
   const [editInfo, seteditInfo] = useState(false);
 
   const [Name, setName] = useState(cookiesUser.name);
-  const [Telegram_name, setTelegram_name] = useState(cookiesUser.telegram_name);
   const [Email, setEmail] = useState(cookiesUser.email);
   const [Telephone, setTelephone] = useState(cookiesUser.telephone);
   const [infoDesc, setinfoDesc] = useState("");
 
   useEffect(() => {
-    fetch('/api/specialties/user/' + cookiesUser.id)
+    fetch('https://group.ithub.software:5000/api/specialties/user/' + cookiesUser.id)
       .then(response => response.json())
       .then(data => { setinfoDesc(data[0]?.name === undefined ? "" : data[0]?.name) })
       .catch(err => console.log(err))
@@ -32,7 +31,7 @@ const Info = () => {
   }
 
   const editDesc = dataDesc => {
-    fetch('http://group.ithub.software:5000/api/specialties/user/' + cookiesUser.id,
+    fetch('https://group.ithub.software:5000/api/specialties/user/' + cookiesUser.id,
       {
         method: "POST",
         headers: {
@@ -47,6 +46,7 @@ const Info = () => {
   }
 
   const editInformation = () => {
+    
 
     const dataInfo = {
       name: Name,
@@ -54,13 +54,13 @@ const Info = () => {
       picture: cookiesUser.picture,
       portfolio: cookiesUser.portfolio,
       telephone: Telephone,
-      telegram_name: Telegram_name,
+      telegram_name: cookiesUser.telegram_name,
       email: Email,
       telegram_id: cookiesUser.telegram_id,
       roadmap: cookiesUser.roadmap
     }
 
-    fetch("http://group.ithub.software:5000/api/users/" + cookiesUser.id, {
+    fetch("https://group.ithub.software:5000/api/users/" + cookiesUser.id, {
       method: "PATCH",
       headers: {
         "Access-Control-Allow-Origin": "*",
@@ -91,21 +91,19 @@ const Info = () => {
                 <div className='userContact'>
                   <div className='Telegram'>
                     <img src={telegramLogo} alt="telegram" />
-                    {editInfo ?
-                      <input type="text" value={Telegram_name} name="telegram" onChange={e => { setTelegram_name(e.target.value) }} /> :
-                      <button onClick={() => copy("https://t.me/" + Telegram_name)}>{Telegram_name}</button>}
+                      <button onClick={() => copy("https://t.me/" + cookiesUser.telegram_name)}>{cookiesUser.telegram_name}</button>
                   </div>
                   <div className='email'>
-                    <img src={emailLogo} alt="email" />
                     {editInfo ?
-                      <input type="text" value={Email} name="email " onChange={e => { setEmail(e.target.value) }} /> :
-                      <button onClick={() => copy(Email)}>{Email}</button>}
+                      <><img src={emailLogo} alt="email" />
+                      <input type="text" value={Email} name="email " onChange={e => { setEmail(e.target.value) }} /></> :
+                      <>{Email === null || Email === "" ? "" : <img src={emailLogo} alt="email" />}<button onClick={() => copy(Email)}>{Email}</button></>}
                   </div>
                   <div className='telefone'>
-                    <img src={tellogo} alt="tel" />
                     {editInfo ?
-                      <input type="text" value={Telephone} name="tel" onChange={e => { setTelephone(e.target.value) }} /> :
-                      <button onClick={() => copy(Telephone)}>{Telephone}</button>}
+                    <><img src={tellogo} alt="telegram" />
+                    <input type="text" value={Telephone} name="tel" onChange={e => { setTelephone(e.target.value) }} /></>:
+                      <>{Telephone === null || Telephone === "" ? "" : <img src={tellogo} alt="telegram" />}<button onClick={() => copy(Telephone)}>{Telephone}</button></>}
                   </div>
                 </div>
               </div>
@@ -117,7 +115,7 @@ const Info = () => {
           <div className='userDescription'>
             {editInfo ?
               <><textarea value={infoDesc} onChange={e => { setinfoDesc(e.target.value) }} />
-              </> : <><textarea value={infoDesc} readOnly /></>}
+              </> : <div>{infoDesc}</div>}
           </div>
         </div>
       </div>

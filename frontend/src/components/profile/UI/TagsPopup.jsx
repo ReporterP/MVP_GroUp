@@ -11,7 +11,7 @@ const TagsPopup = props => {
     const [addTagInput, setaddTagInput] = useState("");
 
     const getTags = () => {
-        fetch('/api/tags-user/user/' + cookiesUser.id)
+        fetch('https://group.ithub.software:5000/api/tags-user/user/' + cookiesUser.id)
             .then(response => response.json())
             .then(data => setTags(data))
             .catch(err => console.log(err))
@@ -20,7 +20,7 @@ const TagsPopup = props => {
     const patchTags = () => {
         let tags = Tags.map(e => e.tag)
         if (addTagInput !== ""){tags.push(addTagInput)}
-        fetch('http://group.ithub.software:5000/api/tags-user/user/' + cookiesUser.id,
+        fetch('https://group.ithub.software:5000/api/tags-user/user/' + cookiesUser.id,
             {
                 method: "PATCH",
                 headers: {

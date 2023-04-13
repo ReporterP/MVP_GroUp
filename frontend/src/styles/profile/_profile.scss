@@ -87,7 +87,20 @@
         border-radius: 5px;
         background-color: transparent;
         color: $base-text-color;
+    }
 
+    div {
+        width: 100%;
+        padding: 10px;
+        border: 0.5px solid $active-color;
+        border-radius: 5px;
+        color: $base-text-color;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none; 
     }
 }
 

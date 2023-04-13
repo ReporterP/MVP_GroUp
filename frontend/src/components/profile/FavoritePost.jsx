@@ -11,7 +11,7 @@ const FavoritePost = () => {
   const dataUserID = useMemo(() => cookies.get("user").id, [cookies])
 
   const showLike = () => {
-    fetch('/api/users/likeposts/' + dataUserID)
+    fetch('https://group.ithub.software:5000/api/users/likeposts/' + dataUserID)
       .then(response => response.json())
       .then(data => {
         data = data.map(e => e.id);
@@ -22,7 +22,7 @@ const FavoritePost = () => {
   }
 
   const showInfo = likes => {
-    fetch('api/posts/')
+    fetch('https://group.ithub.software:5000/api/posts/')
       .then(response => response.json())
       .then(data => {
         data = data.filter(e => likes.indexOf(e.id) * 1 !== -1);

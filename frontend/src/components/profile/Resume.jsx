@@ -11,23 +11,23 @@ const Resume = () => {
   const [workExp, setworkExp] = useState([]);
 
   const getHardSkills = () => {
-    fetch('/api/resume-hard/user/' + cookiesUser.id)
+    fetch('https://group.ithub.software:5000/api/resume-hard/user/' + cookiesUser.id)
     .then(response => response.json())
     .then(data => sethardSkills(data))
     .catch(err => console.log(err))
   }
 
   const getSoftSkills = () => {
-    fetch('/api/resume-soft/user/' + cookiesUser.id)
+    fetch('https://group.ithub.software:5000/api/resume-soft/user/' + cookiesUser.id)
     .then(response => response.json())
-    .then(data => console.log(data))
+    .then(data => setsoftSkills(data))
     .catch(err => console.log(err))
   }
 
   const getWorkExp = () => {
-    fetch('/api/resume-work-exp/user/' + cookiesUser.id)
+    fetch('https://group.ithub.software:5000/api/resume-work-exp/user/' + cookiesUser.id)
     .then(response => response.json())
-    .then(data => console.log(data))
+    .then(data => setworkExp(data))
     .catch(err => console.log(err))
   }
 
@@ -37,36 +37,13 @@ const Resume = () => {
     getWorkExp()
   }, []);
 
-  // TODO: create hardSkills, softSkills, workExperience consts and get data from DB here
-  const hardSkill = [
-    {
-      id: 1,
-      hard: 'Python',
-      level_edu: 3,
-      description: 'Django, Flask, PyGame, FastAPI, Pandas, NumPy, Nimpa'
-    },
-    {
-      id: 2,
-      hard: 'C#',
-      level_edu: 4,
-      description: 'ADO.NET, EntityFramework, .NET 6, WPF, UWP, MAUI, Xamarin'
-    },
-    {
-      id: 3,
-      hard: 'Dart',
-      level_edu: 2,
-      description: 'Flutter'
-    }
-  ]
-
-  // TODO: set data here
   return (
     <div id='resumeArea'>
-      <EditableAccordionsArea title={'Hard-skills'} color={'#68e68b'} accordions={hardSkills} />
+      <EditableAccordionsArea title={'Hard-skills'} color={'#68e68b'} accordions={hardSkills} area={"hard"}/>
 
-      <EditableAccordionsArea title={'Soft-skills'} color={'#ffbd70'} accordions={hardSkill} />
+      <EditableAccordionsArea title={'Soft-skills'} color={'#ffbd70'} accordions={softSkills} area={"soft"}/>
 
-      <EditableAccordionsArea title={'Опыт работы'} color={'#7c91ff'} accordions={hardSkill} />
+      <EditableAccordionsArea title={'Опыт работы'} color={'#7c91ff'} accordions={workExp} area={"workExp"} />
     </div>
   );
 }

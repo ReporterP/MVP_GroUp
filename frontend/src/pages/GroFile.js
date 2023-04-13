@@ -18,10 +18,10 @@ const GroFile = () => {
     const dataUserID = useMemo(() => cookies.get("user").id, [cookies])
 
     const showLike = () => {
-        fetch('/api/users/likeposts/' + dataUserID)
+        fetch('https://group.ithub.software:5000/api/users/likeposts/' + dataUserID)
             .then(response => response.json())
             .then(data => {
-                data = data.map(e => e.id);
+                data = data?.map(e => e.id);
                 setPostLike(data);
                 showInfo()
             })
@@ -29,7 +29,7 @@ const GroFile = () => {
     }
 
     const showInfo = () => {
-        fetch('api/posts/')
+        fetch('https://group.ithub.software:5000/api/posts/')
             .then(response => response.json())
             .then(data => setPostsInfo(data))
             .catch(err => setPostsInfo([{
