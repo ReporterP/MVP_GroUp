@@ -39,8 +39,8 @@ const ProfileMenu = props => {
         <div className='ProfileMenu'>
             <button onClick={pers} style={colorPers}>Личное</button>
             <button onClick={fav} style={colorFav}>Избранное</button>
-            {/* <button onClick={res} style={colorRes}>Резюме</button>
-            {props.isAdminRole?<button onClick={admin} style={colorAdmin}>Админ</button>:""} */}
+            <button onClick={res} style={colorRes}>Резюме</button>
+            {props.isAdminRole?<button onClick={admin} style={colorAdmin}>Админ</button>:""}
         </div>
     );
 }

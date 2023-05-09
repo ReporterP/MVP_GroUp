@@ -66,7 +66,9 @@ let UsersService = class UsersService {
     }
     async update(id, updateUserDto) {
         const user = await this.userRepo.update(Object.assign({}, updateUserDto), { where: { id } });
-        return user;
+        return await this.userRepo.findOne({ where: {
+                id,
+            } });
     }
 };
 UsersService = __decorate([

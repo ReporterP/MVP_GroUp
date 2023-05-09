@@ -9,5 +9,5 @@ export declare class UsersController {
     findOneUserForResume(id: string): Promise<import("./models/users.model").User>;
     getUserPost(id: string): Promise<import("../posts/models/posts.model").Post[]>;
     getLikedPost(id: string): Promise<import("../posts/models/posts.model").Post[]>;
-    update(id: string, updateUserDto: UpdateUserDto): Promise<[affectedCount: number]>;
+    update(id: string, updateUserDto: UpdateUserDto): Promise<import("./models/users.model").User>;
 }

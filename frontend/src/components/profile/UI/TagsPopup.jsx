@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Animated } from "react-animated-css";
 import TagMenuItem from './TagMenuItem.jsx';
 import Cookies from 'universal-cookie';
+import closeIcon from '../../../img/whitePlusIcon.svg'
 
 const TagsPopup = props => {
 
@@ -32,6 +33,7 @@ const TagsPopup = props => {
             .then(response => response.json())
             .then(data =>{ console.log(data);getTags()})
             .catch(err => console.log(err))
+            setaddTagInput("")
     }
     
     useEffect(getTags, [])
@@ -43,8 +45,8 @@ const TagsPopup = props => {
                 <Animated animationIn="bounceInUp" animationOut='bounceInDown' isVisible={true}>
                     <div className='tagsPopup'>
                         <div className='topBar'>
-                            <span onClick={() => { props.open(false) }}>Отменить</span>
                             <button onClick={() => {patchTags(); props.open(false)}}>Сохранить</button>
+                            <span onClick={() => { props.open(false) }}><img src={closeIcon} className='closeIcon' alt="close"></img></span>    
                         </div>
                         <div className='addTag'>
                             <input type="text" value={addTagInput} onChange={e => { setaddTagInput(e.target.value) }}/>
@@ -61,9 +63,6 @@ const TagsPopup = props => {
                 </Animated>
             </div>
         </div>
-        // <div className='tagsPopup'>
-
-        // </div>
     )
 }
 

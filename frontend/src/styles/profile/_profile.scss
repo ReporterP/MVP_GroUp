@@ -471,6 +471,10 @@
         grid-column-end: 4;
 
         display: none;
+        button {
+            background-color: transparent;
+            border: none;
+        }
     }
 
     &.editing {
@@ -483,6 +487,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            
         }
     }
 }

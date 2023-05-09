@@ -11,5 +11,5 @@ export declare class UsersService {
     findOne(telegram_id: number): Promise<User>;
     getUserPost(user_id: number): Promise<import("../posts/models/posts.model").Post[]>;
     getLikedPost(user_id: number): Promise<import("../posts/models/posts.model").Post[]>;
-    update(id: number, updateUserDto: UpdateUserDto): Promise<[affectedCount: number]>;
+    update(id: number, updateUserDto: UpdateUserDto): Promise<User>;
 }

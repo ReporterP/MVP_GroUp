@@ -5,24 +5,23 @@ import starOutlined from '../../../img/starOutlined.png'
 import ModeContext from "../ModeContext";
 import TrashIcon from '../../../img/Trash.svg'
 
-function autoHeight(e) {  /* javascript */
+const autoHeight = e => {
   e.target.style.height = "1px";
-  e.target.style.height = (e.target.scrollHeight)+"px";
+  e.target.style.height = (e.target.scrollHeight) + "px";
 }
 
-const range = (size) =>
-  [...Array(size).keys()];
+const range = size => [...Array(size).keys()]
 
-const SkillAccordion = props => {
+const EditableAccordion = props => {
   const maxStars = 5
-  const mode     = React.useContext(ModeContext)
-  const type     = props.type
+  const mode = React.useContext(ModeContext)
+  const type = props.type
 
   const [textState, setTextState] = useState(props.text)
   const [descriptionState, setDescriptionState] = useState(props.children)
   const [starsCountState, setStarsCountState] = useState(props.starsCount)
   const [isClosed, setIsClosed] = React.useState(true)
-  
+
   const isClosedClass = () => isClosed ? '' : ' closed'
   const isEditingClass = () => mode ? ' editing' : ''
 
@@ -33,47 +32,41 @@ const SkillAccordion = props => {
 
   const handleSetStarsCount = (e, x) => {
     stopPropagation(e)
-    setStarsCountState(x+1)
+    setStarsCountState(x + 1)
   }
 
   useEffect(() => {
-    if (type === "hard"){
-      props.setNewAccord(props.newAccord?.map(e=>e.id*1 === props.id*1 ?e = {
-        id: props.id,
+    if (type === "hard") {
+      props.newAccord[props.el] = {
         hard: textState,
         level_edu: starsCountState,
-        description: descriptionState
-      }:e = e)
-    )
-    }
-    else if (type === "soft"){
-      props.setNewAccord(props.newAccord?.map(e=>e.id*1 === props.id*1 ?e = {
-        id: props.id,
-        hard: textState,
+        description: descriptionState,
+      }
+      props.setNewAccord(props.newAccord)
+    } else if (type === "soft") {
+      props.newAccord[props.el] = {
+        soft: textState,
         level_edu: starsCountState,
-        description: descriptionState
-        }:e = e)
-      )
-    }
-    else if (type === "workExp"){
-      props.setNewAccord(props.newAccord?.map(e=>e.id*1 === props.id*1 ?e = {
-        id: props.id,
-        hard: textState,
-        level_edu: starsCountState,
-        description: descriptionState
-        }:e = e)
-      )
+        description: descriptionState,
+      }
+      props.setNewAccord(props.newAccord)
     }
   }, [descriptionState, starsCountState, textState]);
+
+  useEffect(() => {
+    setTextState(props.text)
+    setDescriptionState(props.children)
+    setStarsCountState(props.starsCount)
+  }, [props])
 
   return (
     <div className={"editableAccordionRow" + isEditingClass()}>
       <div onClick={() => setIsClosed(!isClosed && !mode)}
-          className={'editableAccordion' + isClosedClass()}
-          style={{backgroundColor: props.color}}>
-        
+        className={'editableAccordion' + isClosedClass()}
+        style={{ backgroundColor: props.color }}>
+
         <span className='accordionArrow'>
-          <img src={AccordionArrow} />
+          <img src={AccordionArrow} alt='arrow' />
         </span>
 
         {
@@ -86,10 +79,10 @@ const SkillAccordion = props => {
           {
             !mode ?
               range(maxStars).map(x =>
-                <img src={x < starsCountState ? starFilled : starOutlined} />
+                <img src={x < starsCountState ? starFilled : starOutlined} alt='stars' />
               ) :
               range(maxStars).map(x =>
-                <img src={x < starsCountState ? starFilled : starOutlined} onClick={e => handleSetStarsCount(e, x)} />
+                <img src={x < starsCountState ? starFilled : starOutlined} onClick={e => handleSetStarsCount(e, x)} alt='stars' />
               )
           }
         </span>
@@ -107,16 +100,16 @@ const SkillAccordion = props => {
           }
         </div>
       </div>
-      
+
       <div className="deleteBtn">
         {!mode ? '' :
-        <button>
+          <button onClick={() => props.deleteAccordElem(props.el)}>
             <img src={TrashIcon} alt="кнопка удаления" />
-        </button>
-              }
+          </button>
+        }
       </div>
     </div>
   )
 }
 
-export default SkillAccordion
+export default EditableAccordion
