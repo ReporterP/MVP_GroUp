@@ -3,12 +3,16 @@ import {Routes, Route} from "react-router-dom";
 import '../styles/global.scss';
 import Auth from "./Auth";
 import GroFile from "./GroFile";
-import { WebApp } from "@grammyjs/web-app";
+// import { WebApp } from "@grammyjs/web-app";
 
 function App() {
+  const WebApp = window.Telegram.WebApp
+  
   return (
     <>
     {WebApp.expand()}
+    {WebApp.enableClosingConfirmation()}
+    {WebApp.onEvent("viewportChanged", ()=>{if(!WebApp.isExpanded)WebApp.expand()})}
       <Routes>
         <Route exact path="/" element={<Auth />}/>
         <Route exact path="/grofile" element={<GroFile />}/>

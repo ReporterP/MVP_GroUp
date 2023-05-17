@@ -44,8 +44,9 @@ const GroFile = () => {
     useEffect(showLike, []);
 
     return (
-        <><Header post={isPosts} />
-            {isPosts && <Suspense fallback={<Loading />}><Posts cards={postsInfo} likes={postLike} withPaddingTop={true} /></Suspense>}
+        <>
+        <Header post={isPosts} />
+            {isPosts && <Suspense fallback={<Loading />}><div className='scrollable scroll_posts'><Posts cards={postsInfo} likes={postLike} withPaddingTop={true} /></div></Suspense>}
             {isProfile && <Suspense fallback={<Loading />}><Profile /></Suspense>}
             <Footer profile={setIsProfile} post={setisPosts} /></>);
 }

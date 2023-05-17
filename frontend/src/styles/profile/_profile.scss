@@ -126,6 +126,7 @@
 .containerProfileComp {
     height: 65vh;
     padding: 0 20px 30px 20px;
+    margin-bottom: 60px;
     background-color: $base-background-color;
     overflow-y: auto;
 
@@ -412,6 +413,7 @@
             padding-top: 0;
             padding-bottom: 0;
             border: 1px solid black;
+            border-radius: 3    px;
             background: transparent;
         }
 
@@ -435,6 +437,7 @@
                 padding-top: 0;
                 padding-bottom: 0;
                 border: 1px solid black;
+                border-radius: 3px;
                 resize: none;
             }
 

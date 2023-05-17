@@ -40,7 +40,7 @@ const FavoritePost = () => {
   useEffect(showLike, []);
 
   return (
-    <><Posts cards={postsInfo} likes={postLike} withPaddingTop={false} /></>
+    <div className='scrollable scroll_like'><Posts cards={postsInfo} likes={postLike} withPaddingTop={false} /></div>
   );
 }
 

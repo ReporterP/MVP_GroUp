@@ -2,35 +2,49 @@
     #createPostBtn {
         font-size: 14px;
         padding: 5px;
-        
+
     }
 
     #myPosts {
         margin-top: 15px;
 
-        .scrollable {
-            margin-top: 5px;
-            height: 50vh;
-            overflow: auto;
-
-            &::-webkit-scrollbar {
-                display: block;
-                width: 5px;
-            }
-            &::-webkit-scrollbar-track {
-                background: $main-color;
-            }
-            &::-webkit-scrollbar-thumb {
-                background-color: $active-color;
-                border-radius: 5px;
-            }
-        }
-        
         h3 {
             color: white;
         }
     }
-    
+
+}
+
+.scrollable {
+    margin-top: 5px;
+    overflow: auto;
+
+
+    &::-webkit-scrollbar {
+        display: block;
+        width: 5px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: $main-color;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: $active-color;
+        border-radius: 5px;
+    }
+}
+
+.scroll_admin {
+    height: 55vh;
+}
+
+.scroll_like {
+    height: 65vh;
+}
+
+.scroll_posts {
+    height: 90vh;
 }
 
 .postCreationPopup {
@@ -42,13 +56,13 @@
     width: min($max-screen-width, 100vw);
     margin-left: 50%;
     transform: translate(-50%);
-    
+
     z-index: 10000;
 
     .topBar {
         padding: 10px 20px;
     }
-    
+
     .content {
         background: #353b49;
         height: 100vh;
@@ -92,9 +106,17 @@
                 padding: 4px 11px;
                 font-size: 9px;
                 display: inline-block;
-                
-                &.selected {
-                    background: $active-color;
+
+                &.news {
+                    background: rgb(255, 189, 112)
+                }
+
+                &.vacancy {
+                    background: rgb(124, 145, 255)
+                }
+
+                &.event {
+                    background: rgb(36, 215, 86)
                 }
 
                 select {

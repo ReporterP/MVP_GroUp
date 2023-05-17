@@ -35,10 +35,7 @@ const ViewPost = props => {
               <h5>{props.title}</h5>
               <div className='tags'>
                 {
-                  props.tag_id.map(e=>{
-                    tagStyle = {backgroundColor: e[1]}
-                    return <div className='tag' style={tagStyle}>{e[0]}</div>
-                  })
+                  props.tag_id?.map(e=><div className='tag' style={{backgroundColor: e.color}}>{e.tag}</div>)
                 }
               </div>
               <p>{props.text}</p>

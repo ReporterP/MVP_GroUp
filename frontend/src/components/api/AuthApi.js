@@ -1,6 +1,5 @@
 import React from 'react';
 import { useNavigate } from "react-router-dom";
-// import { WebApp } from "@grammyjs/web-app";
 import Cookies from 'universal-cookie';
 
 const AuthApi = () => {
@@ -9,9 +8,9 @@ const AuthApi = () => {
     
     const navigate = useNavigate();
 
-    // const telegram_id = WebApp.initDataUnsafe.user?.id === undefined ? 0: WebApp.initDataUnsafe.user?.id *1
+    const telegram_id = WebApp.initDataUnsafe.user?.id === undefined ? 0: WebApp.initDataUnsafe.user?.id *1
 
-    const telegram_id = 12345
+    // const telegram_id = 12345
 
     const correct_auth = (userData) => {
         const cookies = new Cookies();

@@ -1,46 +1,85 @@
-import React from 'react';
+import React, {useState} from 'react';
+import Cookies from 'universal-cookie';
 import { Animated } from 'react-animated-css';
 import PostTypeSelector from './PostTypeSelector';
-import TagSelector from './TagSelector';
+import closeIcon from '../../img/whitePlusIcon.svg'
 
 const PostCreation = (props) => {
   const setPopupOpened = props.setPopupOpened;
+  var cookie = new Cookies();
+  const cookiesUser = cookie.get("user")
+  const [valueSelector, setvalueSelector] = useState('')
+  const [tagSelector, settagSelector] = useState([]);
 
   const picture = '';
 
+  const typeObj = {
+    "vacancy": "Вакансия",
+    "event": "Мероприятие",
+    "news": "Новость"
+  }
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    const data = new FormData(e.target)
+    
+    const sendPost = {
+      type:    typeObj[valueSelector],
+      title:   data.get("title"),
+      text:    data.get("text"),
+      picture: picture,
+      user_id: cookiesUser.id*1,
+      tags:    data.get("tags") === ""?data.get("tags"):data.get("tags").split(" "),
+    }
+
+    console.log(sendPost.type)
+    if (sendPost.type !== undefined && sendPost.title !== "") {
+      fetch("https://group.ithub.software:5000/api/posts", {
+        method: "POST",
+        headers: { 
+            "Access-Control-Allow-Origin": "*", 
+            'Content-Type': "application/json"},
+        body: JSON.stringify(sendPost)})
+      .then(() => {
+        setPopupOpened(false);
+        console.log("great!!!)")})
+      .catch(err => console.log(err))
+    }
+  }
+
   return (
-    <div className={'postCreationPopup'}>
+    <div className='postCreationPopup'>
       <Animated animationIn="bounceInUp" animationOut='bounceInDown' isVisible={true}>
-        <div>
-          <div className={'content'}>
-            <div className={'flex flexSpaceBetween topBar'}>
-              <button className={'voidButton'} onClick={() => setPopupOpened(false)}>
-                Отменить
+        <form onSubmit={handleSubmit}>
+          <div className='content'>
+            <div className='flex flexSpaceBetween topBar'>
+              <button className='voidButton' onClick={() => setPopupOpened(false)}>
+                <img src={closeIcon} className='closeIcon' alt="close"></img>
               </button>
 
-              <button className={'greenButton'} onClick={() => console.log('Опубликовать!')}>
+              <button className='greenButton' type='submit'>
                 Опубликовать
               </button>
             </div>
           
-            <div className='pictureSetArea' style={{backgroundImage: picture}}>
+            {/* <div className='pictureSetArea' style={{backgroundImage: picture}}>
               { picture !== '' ? '' :
                   <span>У вашего поста нет обложки</span>
               }
               <button className='uploadPictureBtn' />
-            </div>
+            </div> */}
 
-            <PostTypeSelector />
+            <PostTypeSelector setvalueSelector={setvalueSelector} valueSelector={valueSelector}/>
 
             <div className="inputs">
-              <input placeholder='Название' type="text" />
+              <input name="title" placeholder='Название' type="text" />
 
-              <TagSelector />
+              <input name="tags" type="text" placeholder='Введите теги для поста через пробел'/>
 
-              <textarea placeholder='Описание' cols="30" rows="15" />
+              <textarea name="text" placeholder='Описание' cols="30" rows="15" />
             </div>
           </div>
-        </div>
+        </form>
       </Animated>
     </div>
   );
