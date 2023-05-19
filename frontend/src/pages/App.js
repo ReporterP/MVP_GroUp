@@ -10,9 +10,10 @@ function App() {
   
   return (
     <>
+    {WebApp.ready()}
     {WebApp.expand()}
     {WebApp.enableClosingConfirmation()}
-    {WebApp.onEvent("viewportChanged", ()=>{if(!WebApp.isExpanded)WebApp.expand()})}
+    {WebApp.onEvent("viewportChanged", ()=>WebApp.expand())}
       <Routes>
         <Route exact path="/" element={<Auth />}/>
         <Route exact path="/grofile" element={<GroFile />}/>

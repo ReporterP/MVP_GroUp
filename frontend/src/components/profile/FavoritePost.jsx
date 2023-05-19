@@ -1,9 +1,12 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useContext } from 'react';
 import Cookies from 'universal-cookie';
 import Posts from '../posts/Posts';
+import RefreshContext from '../context/RefreshContext';
+
 
 const FavoritePost = () => {
 
+  const {refresh, setrefresh} = useContext(RefreshContext);
   const [postsInfo, setPostsInfo] = useState([]);
   const [postLike, setPostLike] = useState([]);
 
@@ -37,7 +40,12 @@ const FavoritePost = () => {
       }]))
   }
 
-  useEffect(showLike, []);
+  useEffect(()=> {
+    showLike()
+    return () => {
+        setrefresh(false)
+    }
+}, [refresh]);
 
   return (
     <div className='scrollable scroll_like'><Posts cards={postsInfo} likes={postLike} withPaddingTop={false} /></div>

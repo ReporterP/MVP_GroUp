@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import AccordionArrow from '../../../img/accordionArrow.svg';
 import starFilled from '../../../img/starFilled.png'
 import starOutlined from '../../../img/starOutlined.png'
-import ModeContext from "../ModeContext";
+import ModeContext from "../../context/ModeContext";
 import TrashIcon from '../../../img/Trash.svg'
 
 const autoHeight = e => {

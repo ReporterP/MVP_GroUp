@@ -3,11 +3,13 @@ import Footer from '../components/main/Footer';
 import Loading from '../components/main/UI/Loading';
 import Header from "../components/main/Header";
 import Cookies from 'universal-cookie';
+import RefreshContext from '../components/context/RefreshContext';
 
 const Posts = lazy(() => import('../components/posts/Posts'));
 const Profile = lazy(() => import('./Profile'));
 
 const GroFile = () => {
+    const [refresh, setrefresh] = useState(false);
 
     const [isProfile, setIsProfile] = useState(false);
     const [isPosts, setisPosts] = useState(true);
@@ -41,14 +43,22 @@ const GroFile = () => {
             }]))
     }
 
-    useEffect(showLike, []);
+    useEffect(()=> {
+        showLike()
+        return () => {
+            setrefresh(false)
+        }
+    }, [refresh]);
 
     return (
         <>
         <Header post={isPosts} />
-            {isPosts && <Suspense fallback={<Loading />}><div className='scrollable scroll_posts'><Posts cards={postsInfo} likes={postLike} withPaddingTop={true} /></div></Suspense>}
-            {isProfile && <Suspense fallback={<Loading />}><Profile /></Suspense>}
-            <Footer profile={setIsProfile} post={setisPosts} /></>);
+            <RefreshContext.Provider value={{refresh, setrefresh}}>
+                {isPosts && <Suspense fallback={<Loading />}><div className='scrollable scroll_posts'><Posts cards={postsInfo} likes={postLike} withPaddingTop={true} /></div></Suspense>}
+                {isProfile && <Suspense fallback={<Loading />}><Profile /></Suspense>}
+                <Footer profile={setIsProfile} post={setisPosts} />
+            </RefreshContext.Provider>
+        </>);
 }
 
 export default GroFile;

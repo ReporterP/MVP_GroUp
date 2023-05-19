@@ -1,15 +1,17 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import Cookies from 'universal-cookie';
 import { Animated } from 'react-animated-css';
 import PostTypeSelector from './PostTypeSelector';
-import closeIcon from '../../img/whitePlusIcon.svg'
+import closeIcon from '../../img/whitePlusIcon.svg';
+import RefreshContext from '../context/RefreshContext';
 
 const PostCreation = (props) => {
+  const {refresh, setrefresh} = useContext(RefreshContext);
+
   const setPopupOpened = props.setPopupOpened;
   var cookie = new Cookies();
   const cookiesUser = cookie.get("user")
   const [valueSelector, setvalueSelector] = useState('')
-  const [tagSelector, settagSelector] = useState([]);
 
   const picture = '';
 
@@ -42,7 +44,7 @@ const PostCreation = (props) => {
         body: JSON.stringify(sendPost)})
       .then(() => {
         setPopupOpened(false);
-        console.log("great!!!)")})
+        setrefresh(true)})
       .catch(err => console.log(err))
     }
   }

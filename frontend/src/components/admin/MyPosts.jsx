@@ -1,9 +1,12 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import Posts from '../posts/Posts';
 import Cookies from 'universal-cookie';
+import RefreshContext from '../context/RefreshContext';
 
 
 const MyPosts = () => {
+  const {refresh, setrefresh} = useContext(RefreshContext);
+
   const cookies = new Cookies()
   const dataUserID = cookies.get("user").id
 
@@ -34,7 +37,12 @@ const MyPosts = () => {
     }]))
   }
 
-  useEffect(showLike, []);
+  useEffect(()=> {
+    showLike()
+    return () => {
+        setrefresh(false)
+    }
+}, [refresh]);
 
   return (
     <div id='myPosts'>

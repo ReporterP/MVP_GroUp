@@ -3,7 +3,7 @@ import EditableAccordions from "./UI/EditableAccordions"
 import EditButtonIcon from '../../img/EditButtonIcon.svg'
 import TickIcon from '../../img/tickIcon.svg'
 import PlusIcon from '../../img/whitePlusIcon.svg'
-import ModeContext from "./ModeContext"
+import ModeContext from "../context/ModeContext"
 
 const EditableAccordionsArea = props => {
   const title      = props.title
