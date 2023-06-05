@@ -1,6 +1,6 @@
 import { React, useState } from 'react';
 import ProfileTags from './UI/ProfileTags';
-import Roadmap from './UI/Roadmap';
+// import Roadmap from './UI/Roadmap';
 import EditButton from './../../img/EditButtonIcon.svg';
 import TagsPopup from './UI/TagsPopup';
 
@@ -16,8 +16,8 @@ const Personal = () => {
         <img src={EditButton} alt='edit button' onClick={()=>{setTagsPopupOpened(true)}} />
       </div>
       <ProfileTags update={tagsPopupOpened}/>
-      <h6>Роадмап</h6>
-      <Roadmap/>
+      {/* <h6>Роадмап</h6> */}
+      {/* <Roadmap/> */}
 
     </div>
     {tagsPopupOpened && 

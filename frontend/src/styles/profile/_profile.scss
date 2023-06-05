@@ -1,10 +1,15 @@
+#containerProfile {
+    height: 100vh;
+    overflow-y: scroll;
+}
+
 .userInfoContainer {
-    margin: 80px 10px 20px 12px;
+    margin: 80px 10px 20px;
 }
 
 .information {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
 
     &>div {
@@ -14,11 +19,15 @@
 }
 
 .userImg {
-    width: 40px;
-    height: 40px;
+    width: 100px;
+    height: 100px;
     overflow: hidden;
-    border-radius: 5px;
+    border-radius: 20px;
     margin-right: 10px;
+    box-shadow: 0 0 20px 3px #0000001c;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
 
     img {
         width: 100%;
@@ -52,6 +61,8 @@
         align-items: center;
 
         img {
+            width: 10px;
+            height: 10px;
             margin-right: 5px;
         }
     }
@@ -106,18 +117,18 @@
 
 .ProfileMenu {
     width: 100%;
-    height: 30px;
+    height: auto;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding: 5px 0;
+    padding: 5px 0 9px 0;
     background-color: $base-background-color;
-    border-radius: 5px 5px 0 0;
+    border-radius: 25px 25px 0 0;
 
     button {
         border: none;
         background-color: transparent;
-        font-size: 12px;
+        font-size: 13px;
         font-weight: 100;
         color: $base-text-color;
     }
@@ -128,7 +139,7 @@
     padding: 0 20px 30px 20px;
     margin-bottom: 60px;
     background-color: $base-background-color;
-    overflow-y: auto;
+    overflow-y: scroll;
 
     &::-webkit-scrollbar {
         display: none;
@@ -136,6 +147,9 @@
 }
 
 .personal {
+
+    height: 65vh;
+
     h6 {
         font-size: 14pt;
         font-weight: normal;

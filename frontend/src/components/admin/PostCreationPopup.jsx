@@ -34,14 +34,14 @@ const PostCreation = (props) => {
       tags:    data.get("tags") === ""?data.get("tags"):data.get("tags").split(" "),
     }
 
-    console.log(sendPost.type)
+    console.log(sendPost.user_id)
     if (sendPost.type !== undefined && sendPost.title !== "") {
-      fetch("https://group.ithub.software:5000/api/posts", {
-        method: "POST",
-        headers: { 
-            "Access-Control-Allow-Origin": "*", 
-            'Content-Type': "application/json"},
-        body: JSON.stringify(sendPost)})
+      fetch("https://group.ithub.software:5000/api/posts",
+        {method: "POST",
+          headers: {
+              "Access-Control-Allow-Origin": "*",
+              'Content-Type': "application/json"},
+          body: JSON.stringify(sendPost)})
       .then(() => {
         setPopupOpened(false);
         setrefresh(true)})

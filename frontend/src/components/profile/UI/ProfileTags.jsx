@@ -17,7 +17,7 @@ const ProfileTags = props => {
     useEffect(getTags, [props.update])
 
     return (
-        <div className='tags'>{Tags.map(e=><div key={e.id} style={{backgroundColor: e.color}}>{e.tag}</div>)}</div>
+        <div className='tags'>{Tags?.map(e=><div key={e.id} style={{backgroundColor: e.color}}>{e.tag}</div>)}</div>
     );
 }
 

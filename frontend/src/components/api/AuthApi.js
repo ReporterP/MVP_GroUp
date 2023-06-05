@@ -4,13 +4,13 @@ import Cookies from 'universal-cookie';
 
 const AuthApi = () => {
 
-    const WebApp = window.Telegram.WebApp
+    const WebApp = typeof window !== 'undefined' ? window.Telegram.WebApp : null;
     
     const navigate = useNavigate();
 
     // const telegram_id = WebApp.initDataUnsafe.user?.id === undefined ? 0: WebApp.initDataUnsafe.user?.id *1
 
-    const telegram_id = 12345
+    const telegram_id = 484910148
 
     const correct_auth = (userData) => {
         const cookies = new Cookies();
@@ -31,8 +31,8 @@ const AuthApi = () => {
         //     telegram_name: "@telegram", 
         //     name: "telegram telegramovich"
         // }
-        
-        fetch("https://group.ithub.software:5000/api/auth/", {
+
+        fetch("https://group.ithub.software:5000/api/auth", {
             method: "POST",
             headers: { 
                 "Access-Control-Allow-Origin": "*", 

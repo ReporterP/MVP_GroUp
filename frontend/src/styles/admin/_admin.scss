@@ -17,7 +17,7 @@
 
 .scrollable {
     margin-top: 5px;
-    overflow: auto;
+    overflow-y: auto;
 
 
     &::-webkit-scrollbar {

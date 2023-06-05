@@ -6,6 +6,7 @@
     font-family: 'Space Mono', monospace;
     padding: 0;
     margin: 0;
+    word-wrap: break-word;
 }
 
 html {
@@ -16,6 +17,12 @@ body {
     background-color: $main-color;
     max-width: $max-screen-width;
     margin: auto;
+}
+
+#root {
+    height: 100vh;
+    margin-top: 10px;
+    overflow-y: hidden;
 }
 
 p {
@@ -68,4 +75,12 @@ button {
 
 .closeIcon {
     rotate: 3.9rad;
+}
+
+* {
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+}
+::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
 }

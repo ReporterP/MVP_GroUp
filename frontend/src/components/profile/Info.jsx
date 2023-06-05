@@ -3,31 +3,46 @@ import Cookies from 'universal-cookie';
 import telegramLogo from './../../img/Telegram.svg';
 import emailLogo from './../../img/Email.svg';
 import tellogo from './../../img/Vector.svg';
-import GroFile from './../../img/GroFile.svg'
 import EditButton from './../../img/EditButtonIcon.svg';
 import TickIcon from './../../img/tickIcon.svg'
 
 const Info = () => {
   var cookie = new Cookies();
-  const cookiesUser = cookie.get("user")
+  const cookiesUser = cookie.get("user");
 
+  const [filePath, setfilePath] = useState('');
   const [editInfo, seteditInfo] = useState(false);
-
   const [Name, setName] = useState(cookiesUser.name);
   const [Email, setEmail] = useState(cookiesUser.email);
   const [Telephone, setTelephone] = useState(cookiesUser.telephone);
   const [infoDesc, setinfoDesc] = useState("");
+  const [errorTelephone, seterrorTelephone] = useState(false);
+  const [errorEmail, seterrorEmail] = useState(false);
+
+  const errorInput = {border: "2px solid red"};
+
+  const getPhoto = () => {
+    fetch(`https://api.telegram.org/bot5581523508:AAFf18Gki4uS75Gu2eNKybeoA6wiHruXWz4/getUserProfilePhotos?user_id=${cookiesUser.telegram_id}&limit=1`)
+    .then(response => response.json())
+    .then(data =>
+        fetch(`https://api.telegram.org/bot5581523508:AAFf18Gki4uS75Gu2eNKybeoA6wiHruXWz4/getFile?file_id=${data.result.photos[0][0].file_id}`)
+          .then(response => response.json())
+          .then(data => setfilePath(data.result.file_path))
+          .catch(err => console.log(err)))
+    .catch(err => console.log(err))
+  }
 
   useEffect(() => {
-    fetch('https://group.ithub.software:5000/api/specialties/user/' + cookiesUser.id)
+    fetch(`https://group.ithub.software:5000/api/specialties/user/${cookiesUser.id}`)
       .then(response => response.json())
       .then(data => { setinfoDesc(data[0]?.name === undefined ? "" : data[0]?.name) })
       .catch(err => console.log(err))
+
+    getPhoto()
   }, []);
 
   const copy = async text => {
     await navigator.clipboard.writeText(text);
-    console.log('Text copied ' + text);
   }
 
   const editDesc = dataDesc => {
@@ -46,31 +61,33 @@ const Info = () => {
   }
 
   const editInformation = () => {
-    
-
-    const dataInfo = {
-      name: Name,
-      role: cookiesUser.role,
-      picture: cookiesUser.picture,
-      portfolio: cookiesUser.portfolio,
-      telephone: Telephone,
-      telegram_name: cookiesUser.telegram_name,
-      email: Email,
-      telegram_id: cookiesUser.telegram_id,
-      roadmap: cookiesUser.roadmap
-    }
-
-    fetch("https://group.ithub.software:5000/api/users/" + cookiesUser.id, {
-      method: "PATCH",
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        'Content-Type': "application/json"
-      },
-      body: JSON.stringify(dataInfo)
-    })
+    let checkEmail = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu.test(Email) || Email === '' || Email === null
+    let checkTelephone = /^\+?[78][-\(]?\d{3}\)?-?\d{3}-?\d{2}-?\d{2}$/.test(Telephone) || Telephone === '' || Telephone === null
+    seterrorEmail(!checkEmail)
+    seterrorTelephone(!checkTelephone)
+    if (checkEmail && checkTelephone){
+      fetch("https://group.ithub.software:5000/api/users/" + cookiesUser.id, {
+        method: "PATCH",
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          'Content-Type': "application/json"
+        },
+        body: JSON.stringify({
+          name: Name,
+          role: cookiesUser.role,
+          picture: cookiesUser.picture,
+          portfolio: cookiesUser.portfolio,
+          telephone: Telephone,
+          telegram_name: cookiesUser.telegram_name,
+          email: Email,
+          telegram_id: cookiesUser.telegram_id,
+          roadmap: cookiesUser.roadmap
+        })
+      })
       .then(response => response.json())
-      .then(data => cookie.set('user', data, { path: '/' }))
+      .then(data => {cookie.set('user', data, { path: '/' }); seteditInfo(false);})
       .catch(err => console.log(err))
+    }
   }
 
   return (
@@ -79,13 +96,16 @@ const Info = () => {
         <div>
           <div className='information'>
             <div>
-              <div className='userImg'>
-                <img src={GroFile} alt="avatar" />
-              </div>
+
+              <div className='userImg' 
+              style={
+                {backgroundImage: `url(${"https://api.telegram.org/file/bot5581523508:AAFf18Gki4uS75Gu2eNKybeoA6wiHruXWz4/"+filePath})`}
+                }></div>
+
               <div className='contact'>
                 <div className='userNameContact'>
                   {editInfo ?
-                    <input type="text" value={Name} name="name" onChange={e => { setName(e.target.value) }} /> :
+                    <input type="text" placeholder='ФИО' value={Name} name="name" onChange={e => { setName(e.target.value) }} /> :
                     <p>{Name}</p>}
                 </div>
                 <div className='userContact'>
@@ -96,20 +116,20 @@ const Info = () => {
                   <div className='email'>
                     {editInfo ?
                       <><img src={emailLogo} alt="email" />
-                      <input type="text" value={Email} name="email " onChange={e => { setEmail(e.target.value) }} /></> :
+                      <input type="text" placeholder='email' value={Email} name="email" style={errorEmail?errorInput:{}} onChange={e => { setEmail(e.target.value) }} /></> :
                       <>{Email === null || Email === "" ? "" : <img src={emailLogo} alt="email" />}<button onClick={() => copy(Email)}>{Email}</button></>}
                   </div>
                   <div className='telefone'>
                     {editInfo ?
-                    <><img src={tellogo} alt="telegram" />
-                    <input type="text" value={Telephone} name="tel" onChange={e => { setTelephone(e.target.value) }} /></>:
+                    <><img src={tellogo} alt="tel" />
+                    <input type="text" placeholder='телефон' value={Telephone} name="tel" style={errorTelephone?errorInput:{}} onChange={e => { setTelephone(e.target.value) }} /></>:
                       <>{Telephone === null || Telephone === "" ? "" : <img src={tellogo} alt="telegram" />}<button onClick={() => copy(Telephone)}>{Telephone}</button></>}
                   </div>
                 </div>
               </div>
             </div>
             {editInfo ?
-              <img src={TickIcon} alt="Check Button" onClick={() => { seteditInfo(false); editDesc(infoDesc); editInformation() }} /> :
+              <img src={TickIcon} alt="Check Button" onClick={() => { editDesc(infoDesc); editInformation() }} /> :
               <img src={EditButton} alt='edit button' onClick={() => { seteditInfo(true) }} />}
           </div>
           <div className='userDescription'>

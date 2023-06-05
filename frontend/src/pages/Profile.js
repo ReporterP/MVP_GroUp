@@ -19,7 +19,7 @@ const Profile = () => {
     const [isAdmin, setisAdmin] = useState(false);
 
     return (
-        <div>
+        <div id='containerProfile'>
             <Info />
             <ProfileMenu personal={setisPersonal} favoritePost={setisFavoritePost} resume={setisResume} admin={setisAdmin} isAdminRole={cookiesUser.role}/>
             <div className='containerProfileComp'>

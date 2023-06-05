@@ -6,12 +6,23 @@ const ProfileMenu = props => {
     var colorFav = {color: colorMenu==="fav"?"#68E68B":"#FFF"}
     var colorRes = {color: colorMenu==="res"?"#68E68B":"#FFF"}
     var colorAdmin = {color: colorMenu==="admin"?"#68E68B":"#FFF"}
+
+    const handleClick = e => {
+        let conPro = document.getElementById("containerProfile")
+        conPro.scrollBy({
+            top: conPro.offsetHeight,
+            left: 0,
+            behavior: 'smooth',
+        })
+    }
+
     var pers = () => {
         props.personal(true)
         props.favoritePost(false)
         props.resume(false)
         props.admin(false)
         setcolorMenu("pers")
+        handleClick()
     }
     var fav = () => {
         props.personal(false)
@@ -19,6 +30,7 @@ const ProfileMenu = props => {
         props.resume(false)
         props.admin(false)
         setcolorMenu("fav")
+        handleClick()
     }
 
     var res = () => {
@@ -27,6 +39,7 @@ const ProfileMenu = props => {
         props.resume(true)
         props.admin(false)
         setcolorMenu("res")
+        handleClick()
     }
     var admin = () => {
         props.personal(false)
@@ -34,9 +47,10 @@ const ProfileMenu = props => {
         props.resume(false)
         props.admin(true)
         setcolorMenu("admin")
+        handleClick()
     }
     return (
-        <div className='ProfileMenu'>
+        <div className='ProfileMenu' id="ProfileMenu">
             <button onClick={pers} style={colorPers}>Личное</button>
             <button onClick={fav} style={colorFav}>Избранное</button>
             <button onClick={res} style={colorRes}>Резюме</button>

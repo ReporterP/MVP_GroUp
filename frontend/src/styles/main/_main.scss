@@ -30,15 +30,17 @@ footer {
     position: fixed;
     left: 0;
     bottom: 0;
-    padding: 18px 0;
+    padding: 8px 0;
     background-color: $base-background-color;
+    box-shadow: 1px -5px 45px 1px rgb(0 0 0 / 52%);
     z-index: 9999;
+
     button {
         border: none;
         background-color: transparent;
     }
     .container {
-        max-width: calc($max-screen-width / 2 + 40px);
+        max-width: calc($max-screen-width / 2.3);
         margin: auto;
         display: flex;
         align-items: center;

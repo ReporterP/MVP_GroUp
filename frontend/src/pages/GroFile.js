@@ -31,7 +31,7 @@ const GroFile = () => {
     }
 
     const showInfo = () => {
-        fetch('https://group.ithub.software:5000/api/posts/')
+        fetch('https://group.ithub.software:5000/api/posts')
             .then(response => response.json())
             .then(data => setPostsInfo(data))
             .catch(err => setPostsInfo([{
@@ -51,14 +51,14 @@ const GroFile = () => {
     }, [refresh]);
 
     return (
-        <>
+        <div>
         <Header post={isPosts} />
             <RefreshContext.Provider value={{refresh, setrefresh}}>
                 {isPosts && <Suspense fallback={<Loading />}><div className='scrollable scroll_posts'><Posts cards={postsInfo} likes={postLike} withPaddingTop={true} /></div></Suspense>}
                 {isProfile && <Suspense fallback={<Loading />}><Profile /></Suspense>}
                 <Footer profile={setIsProfile} post={setisPosts} />
             </RefreshContext.Provider>
-        </>);
+        </div>);
 }
 
 export default GroFile;

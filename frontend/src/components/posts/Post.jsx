@@ -4,8 +4,7 @@ import Cookies from 'universal-cookie';
 
 const Post = props => {
   const id = props.id
-  console.log(props.tag_id)
-
+  
   var typeStyle = {
   backgroundColor: props.type==="Мероприятие"?"#24D756"
   :props.type==="Вакансия"?"#7C91FF"

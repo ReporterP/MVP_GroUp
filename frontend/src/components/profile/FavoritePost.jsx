@@ -25,7 +25,7 @@ const FavoritePost = () => {
   }
 
   const showInfo = likes => {
-    fetch('https://group.ithub.software:5000/api/posts/')
+    fetch('https://group.ithub.software:5000/api/posts')
       .then(response => response.json())
       .then(data => {
         data = data.filter(e => likes.indexOf(e.id) * 1 !== -1);
