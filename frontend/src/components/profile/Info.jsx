@@ -96,7 +96,6 @@ const Info = () => {
         <div>
           <div className='information'>
             <div>
-
               <div className='userImg' 
               style={
                 {backgroundImage: `url(${"https://api.telegram.org/file/bot5581523508:AAFf18Gki4uS75Gu2eNKybeoA6wiHruXWz4/"+filePath})`}
@@ -129,8 +128,15 @@ const Info = () => {
               </div>
             </div>
             {editInfo ?
-              <img src={TickIcon} alt="Check Button" onClick={() => { editDesc(infoDesc); editInformation() }} /> :
-              <img src={EditButton} alt='edit button' onClick={() => { seteditInfo(true) }} />}
+              <img src={TickIcon} alt="Check Button" onClick={() => { 
+                // eslint-disable-next-line no-undef
+                ym(93896111,'reachGoal','click-safe-edit-user-info');
+                editDesc(infoDesc); 
+                editInformation() }} /> :
+              <img src={EditButton} alt='edit button' onClick={() => {
+                  // eslint-disable-next-line no-undef
+                  ym(93896111,'reachGoal','click-edit-user-info');
+                  seteditInfo(true) }} />}
           </div>
           <div className='userDescription'>
             {editInfo ?

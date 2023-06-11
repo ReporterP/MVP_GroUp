@@ -3,7 +3,7 @@ import { TagsPostsService } from './tags_posts.service';
 import { CreateTagsPostDto } from './dto/create-tags_post.dto';
 import { UpdateTagsPostDto } from './dto/update-tags_post.dto';
 
-@Controller('tags-posts')
+@Controller('api/tags-posts')
 export class TagsPostsController {
   constructor(private readonly tagsPostsService: TagsPostsService) {}
 

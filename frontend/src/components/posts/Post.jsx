@@ -26,7 +26,7 @@ const Post = props => {
     }
   }
 
-  const funcLike = () => {
+  const funcLike = () => {      
       console.log(isLike)
       var data = {
           "user_like_id": dataUserID,
@@ -57,8 +57,17 @@ const Post = props => {
             </div>
             <p>{props.text.substring(0, 145) + '...'}</p>
             <div className='cardButtons'>
-              <button className='check' onClick={funcLike}>{isLike}</button>
-              <button className='view' onClick={()=>{setIsOpen(true)}}>Подробнее</button>
+              <button className='check' onClick={()=>{
+                // eslint-disable-next-line no-undef
+                isLike === "Записан"?ym(93896111,'reachGoal','click-dislike-post'):ym(93896111,'reachGoal','click-like-post')
+                funcLike()
+              }
+                }>{isLike}</button>
+              <button className='view' onClick={()=>{
+              // eslint-disable-next-line no-undef
+              ym(93896111,'reachGoal','click-view-posts');
+              setIsOpen(true)
+              }}>Подробнее</button>
             </div>
           </div>
         </div>

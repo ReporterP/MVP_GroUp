@@ -3,13 +3,13 @@ import { SpecialtiesService } from './specialties.service';
 import { CreateSpecialtyDto } from './dto/create-specialty.dto';
 import { UpdateSpecialtyDto } from './dto/update-specialty.dto';
 
-@Controller('specialties')
+@Controller('api/specialties')
 export class SpecialtiesController {
   constructor(private readonly specialtiesService: SpecialtiesService) {}
 
   @Post('user/:user_id')
-  addNewSpecialties(@Param('user_id') user_id: string, @Body() createSpecialtyDto: CreateSpecialtyDto){
-    return this.specialtiesService.addNewSpecialties(+user_id ,createSpecialtyDto)
+  updateSpecUser(@Param('user_id') user_id: string, @Body() createSpecialtyDto: CreateSpecialtyDto){
+    return this.specialtiesService.updateSpecUser(+user_id ,createSpecialtyDto)
   }
 
   @Get('user/:user_id')

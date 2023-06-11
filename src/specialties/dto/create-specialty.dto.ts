@@ -1,3 +1,6 @@
+import { ApiProperty } from '@nestjs/swagger';
+
 export class CreateSpecialtyDto {
-    readonly name;
+    @ApiProperty()
+    readonly name: string;
 }

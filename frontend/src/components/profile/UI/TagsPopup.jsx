@@ -50,7 +50,10 @@ const TagsPopup = props => {
                         </div>
                         <div className='addTag'>
                             <input type="text" value={addTagInput} onChange={e => { setaddTagInput(e.target.value) }}/>
-                            <button className='addTagButton' onClick={patchTags}>Добавить тег</button>
+                            <button className='addTagButton' onClick={()=>{
+                                // eslint-disable-next-line no-undef
+                                ym(93896111,'reachGoal','click-add-hobby')
+                                patchTags();}}>Добавить тег</button>
                         </div>
                         <div className='tagsList'>
                             {Tags.map(t =>

@@ -1,5 +1,12 @@
+import { ApiProperty } from '@nestjs/swagger';
+
 export class AuthCreateUserDto {
-    readonly telegram_id;
-    readonly telegram_name;
-    readonly name;
+    @ApiProperty()
+    readonly telegram_id: number;
+
+    @ApiProperty()
+    readonly telegram_name: string;
+
+    @ApiProperty()
+    readonly name: string;
 }

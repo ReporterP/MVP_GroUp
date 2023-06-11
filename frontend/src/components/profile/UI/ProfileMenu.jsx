@@ -17,6 +17,8 @@ const ProfileMenu = props => {
     }
 
     var pers = () => {
+        // eslint-disable-next-line no-undef
+        ym(93896111,'reachGoal','click-open-personal-in-profile')
         props.personal(true)
         props.favoritePost(false)
         props.resume(false)
@@ -25,6 +27,8 @@ const ProfileMenu = props => {
         handleClick()
     }
     var fav = () => {
+        // eslint-disable-next-line no-undef
+        ym(93896111,'reachGoal','click-open-fav-in-profile')
         props.personal(false)
         props.favoritePost(true)
         props.resume(false)
@@ -34,6 +38,8 @@ const ProfileMenu = props => {
     }
 
     var res = () => {
+        // eslint-disable-next-line no-undef
+        ym(93896111,'reachGoal','click-open-res-in-profile')
         props.personal(false)
         props.favoritePost(false)
         props.resume(true)
@@ -52,7 +58,7 @@ const ProfileMenu = props => {
     return (
         <div className='ProfileMenu' id="ProfileMenu">
             <button onClick={pers} style={colorPers}>Личное</button>
-            <button onClick={fav} style={colorFav}>Избранное</button>
+            <button onClick={fav} style={colorFav}>Отклики</button>
             <button onClick={res} style={colorRes}>Резюме</button>
             {props.isAdminRole?<button onClick={admin} style={colorAdmin}>Админ</button>:""}
         </div>

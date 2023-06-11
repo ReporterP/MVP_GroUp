@@ -4,7 +4,7 @@ import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 import { LikePostDto } from './dto/like-post.dto';
 
-@Controller('posts')
+@Controller('api/posts')
 export class PostsController {
   constructor(private readonly postsService: PostsService) {}
 

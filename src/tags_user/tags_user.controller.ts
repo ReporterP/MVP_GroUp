@@ -5,7 +5,7 @@ import { UpdateTagsUserDto } from './dto/update-tags_user.dto';
 import { CreateUserTagsDto } from './dto/create-user_tags.dto';
 import { UpdateUserTagsDto } from './dto/update-user_tags.dto';
 
-@Controller('tags-user')
+@Controller('api/tags-user')
 export class TagsUserController {
   constructor(private readonly tagsUserService: TagsUserService) {}
 

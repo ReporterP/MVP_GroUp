@@ -51,14 +51,21 @@ const GroFile = () => {
     }, [refresh]);
 
     return (
-        <div>
-        <Header post={isPosts} />
+        <>
+            {
+            // eslint-disable-next-line no-undef
+            ym(93896111, 'userParams', {
+                UserTelegramID: cookies.get("user").telegram_id,
+                UserID: dataUserID*1
+            })
+            }
+            <Header post={isPosts} />
             <RefreshContext.Provider value={{refresh, setrefresh}}>
                 {isPosts && <Suspense fallback={<Loading />}><div className='scrollable scroll_posts'><Posts cards={postsInfo} likes={postLike} withPaddingTop={true} /></div></Suspense>}
                 {isProfile && <Suspense fallback={<Loading />}><Profile /></Suspense>}
                 <Footer profile={setIsProfile} post={setisPosts} />
             </RefreshContext.Provider>
-        </div>);
+        </>);
 }
 
 export default GroFile;

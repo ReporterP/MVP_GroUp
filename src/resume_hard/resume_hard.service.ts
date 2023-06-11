@@ -34,42 +34,42 @@ export class ResumeHardService {
   async addNewRHforUser(user: any, newResumeHard: Array<CreateResumeHardDto>) {
 
     // add new resumeHard for user and create new resumeHard
-
-    newResumeHard.map(async e => {
-      user.$add('resume_hard_id', await this.findOneByParams(e) ?
-        await this.findOneByParams(e)
-        : await this.create(e));
-    });
+    newResumeHard.map !== undefined?
+      newResumeHard.map(async e => {
+        user.$add('resume_hard_id', await this.findOneByParams(e) ?
+          await this.findOneByParams(e)
+          : await this.create(e));
+      }):
+      console.log("ШО ТЫ МНЕ СУЁШЬ");
   };
 
-  async deleteOldRHforUser(user: any, newResumeHard: Array<CreateResumeHardDto>, oldResumeHard: any) {
+  async deleteOldRHforUser(user: any, newResumeHard: Array<CreateResumeHardDto>, oldResumeHard: Array<any>) {
 
     // delete old resumeHard for user
-
-    oldResumeHard.map(async e => {
-      newResumeHard
-        .map(el => JSON.stringify(el))
-        .indexOf(
-          JSON.stringify(e)) == -1 ?
-        user.$remove('resume_hard_id', await this.findOneByParams(e))
-        : 0;
-    });
+    oldResumeHard.map !== undefined && newResumeHard.map !== undefined?
+      oldResumeHard.map(async e => {
+        newResumeHard.map(el => JSON.stringify(el))
+          .indexOf(
+            JSON.stringify(e)) == -1 ?
+          user.$remove('resume_hard_id', await this.findOneByParams(e))
+          : 0;
+      }):
+      console.log("ШО ТЫ МНЕ СУЁШЬ");
   };
 
 
   async addNewResumeHard(user_id: number, createResumeHardDto: Array<CreateResumeHardDto>) {
 
     let user = await this.usersService.findOneUserForResume(user_id);
-    this.deleteOldRHforUser(user, createResumeHardDto, user.resume_hard_id);
-    this.addNewRHforUser(user, createResumeHardDto);
-
-    return createResumeHardDto;
-
+    user.resume_hard_id === undefined ? user.resume_hard_id = []:false
+      this.deleteOldRHforUser(user, createResumeHardDto, user.resume_hard_id);
+      this.addNewRHforUser(user, createResumeHardDto);
+      return createResumeHardDto.map !== undefined ? createResumeHardDto:  "ШО ТЫ МНЕ СУЁШЬ";
   };
 
   async findHardUser(user_id: number) {
     const user = await this.usersService.findOneUserForResume(user_id);
-    return user.$get('resume_hard_id')
+    return user.$get('resume_hard_id', {order: [['level_edu', 'DESC']]})
   };
 
 };

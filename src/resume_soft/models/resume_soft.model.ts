@@ -1,4 +1,6 @@
-import { Model, Table, Column, DataType } from "sequelize-typescript";
+import { Model, Table, Column, DataType, BelongsToMany } from "sequelize-typescript";
+import { User } from "src/users/models/users.model";
+import { UserResumeSoft } from "./user_resume_soft.model";
 
 interface ResumeSoftCreationAttr {
     soft: string,
@@ -20,4 +22,7 @@ export class ResumeSoft extends Model<ResumeSoft, ResumeSoftCreationAttr> {
 
     @Column({type: DataType.INTEGER})
     level_edu: number;
+
+    @BelongsToMany(() => User, () => UserResumeSoft)
+    user_id: User[];
 }

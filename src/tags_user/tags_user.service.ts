@@ -60,7 +60,7 @@ export class TagsUserService {
   async updateTagUser(user_id: number, updateUserTagsDto: UpdateUserTagsDto) {
     var oldTags:Array<string> = []
     const user = await this.usersService.findOneUserForTags(user_id);
-    await user.tag_id.map(e=>oldTags.push(e["tag"]))
+    user.tag_id.map(e => oldTags.push(e["tag"]))
 
     // Добавление новых тэгов
     updateUserTagsDto.tags.map(async e => {
@@ -83,7 +83,7 @@ export class TagsUserService {
       await user.$remove('tag_id', tag):0
     })
 
-    return user.$get('tag_id')
+    return this.findTagUser(user_id)
   }
 
   async findOne(id: number) {

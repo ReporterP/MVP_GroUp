@@ -4,8 +4,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     img {
         width: 50%;
         height: auto;
+    }
+    .telegram_login_button {
+        &button{
+            background-color: #68E68B;
+        }
     }
 }

@@ -51,9 +51,9 @@ import { UserResumeWorkExp } from './resume_work_exp/models/user_resume_work_exp
       autoLoadModels: true,
       synchronize: true,
     }),
-    ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', 'build'),
-    }),
+    // ServeStaticModule.forRoot({
+    //   rootPath: join(__dirname, '..', 'build'),
+    // }),
     UsersModule,
     AuthModule,
     PostsModule,

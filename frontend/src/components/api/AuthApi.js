@@ -1,17 +1,26 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import Cookies from 'universal-cookie';
+import TelegramLoginButton from 'telegram-login-button'
 
 const AuthApi = () => {
-
-    const WebApp = typeof window !== 'undefined' ? window.Telegram.WebApp : null;
     
     const navigate = useNavigate();
+    const WebApp = typeof window !== 'undefined' ? window.Telegram.WebApp : null;
 
-    // const telegram_id = WebApp.initDataUnsafe.user?.id === undefined ? 0: WebApp.initDataUnsafe.user?.id *1
-
-    const telegram_id = 484910148
-
+    const telegram_id_in_WebApp = WebApp.initDataUnsafe.user?.id === undefined ?
+    0
+    // 484910148
+    : WebApp.initDataUnsafe.user?.id *1
+    
+    const [inBrowser, setinBrowser] = useState(false);    
+    const userDataInBrowser = useRef({})
+    
+    const handleTelegramResponse = user => {
+        userDataInBrowser.current = user;
+        check_in_auth(user.id);
+    };
+    
     const correct_auth = (userData) => {
         const cookies = new Cookies();
         cookies.set('user', userData, { path: '/' });
@@ -19,18 +28,15 @@ const AuthApi = () => {
     }
 
     const auth = (id) => {
-
-        const newUserData = {
+        const newUserData = !inBrowser?{
             telegram_id: id * 1, 
             telegram_name: WebApp.initDataUnsafe.user?.username, 
             name: WebApp.initDataUnsafe.user?.first_name + " " + WebApp.initDataUnsafe.user?.last_name
+        }:{
+            telegram_id: id * 1, 
+            telegram_name: userDataInBrowser.current?.username, 
+            name: userDataInBrowser.current?.first_name + " " + userDataInBrowser.current?.last_name
         }
-
-        // const newUserData = {
-        //     telegram_id: id, 
-        //     telegram_name: "@telegram", 
-        //     name: "telegram telegramovich"
-        // }
 
         fetch("https://group.ithub.software:5000/api/auth", {
             method: "POST",
@@ -43,9 +49,9 @@ const AuthApi = () => {
         .catch(err => console.log(err))
     };
 
-    const auth_in_browser = () => {}
+    const auth_in_browser = () => setinBrowser(true)
 
-    const check_in_auth = () => {
+    const check_in_auth = telegram_id => {
         fetch('https://group.ithub.software:5000/api/auth/'+telegram_id, {
             method: "GET",
             headers: {
@@ -65,9 +71,16 @@ const AuthApi = () => {
         .catch(err =>  alert(err))
     }
 
-    check_in_auth();
+    check_in_auth(telegram_id_in_WebApp);
 
-    return <></>
+    return (
+    <>{inBrowser&&
+        <TelegramLoginButton 
+        botName="GroUpBeta_bot" 
+        dataOnauth={handleTelegramResponse} 
+        className='telegram_login_button'/>
+    }</>
+    )
 }
 
 export default AuthApi;

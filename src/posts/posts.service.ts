@@ -23,21 +23,26 @@ export class PostsService {
   async create(createPostDto: CreatePostDto) {
     const post = await this.postRepo.create(createPostDto);
     const user = await this.usersService.findOneByID(createPostDto.user_id);
-    createPostDto.tags.map(async (e: string)=>{
-      await this.tagsPostsService.findOneByName(e)?0
-      :await this.tagsPostsService.create({
-          "tag":e,
-          "color": getColor()
-        });
-      const tag = await this.tagsPostsService.findOneByName(e);
-      await tag.$add('post_id', post);
-    })
+    try {
+      createPostDto.tags.map(async (e: string)=>{
+        await this.tagsPostsService.findOneByName(e)?0
+        :await this.tagsPostsService.create({
+            "tag":e,
+            "color": getColor()
+          });
+        const tag = await this.tagsPostsService.findOneByName(e);
+        await tag.$add('post_id', post);
+      })
+    } catch {}
     await post.$add('user_id', user)
     return post;
   }
 
   async findAll() {
-    const posts = await this.postRepo.findAll({include: [TagsPost]});
+    const posts = await this.postRepo.findAll({
+      order: [['createdAt', 'DESC']],
+      include: [TagsPost]
+    });
     return posts;
   }
 

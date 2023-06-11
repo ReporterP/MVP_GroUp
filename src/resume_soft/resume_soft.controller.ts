@@ -3,7 +3,7 @@ import { ResumeSoftService } from './resume_soft.service';
 import { CreateResumeSoftDto } from './dto/create-resume_soft.dto';
 import { UpdateResumeSoftDto } from './dto/update-resume_soft.dto';
 
-@Controller('resume-soft')
+@Controller('api/resume-soft')
 export class ResumeSoftController {
   constructor(private readonly resumeSoftService: ResumeSoftService) {}
 

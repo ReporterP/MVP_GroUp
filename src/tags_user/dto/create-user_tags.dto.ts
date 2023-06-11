@@ -1,3 +1,6 @@
+import { ApiProperty } from '@nestjs/swagger';
+
 export class CreateUserTagsDto {
-    readonly tags;
+    @ApiProperty()
+    readonly tags: Array<any>;
 }

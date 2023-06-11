@@ -1,5 +1,12 @@
+import { ApiProperty } from '@nestjs/swagger';
+
 export class CreateResumeHardDto {
-    readonly hard;
-    readonly description;
-    readonly level_edu;
+    @ApiProperty()
+    readonly hard: string;
+
+    @ApiProperty()
+    readonly description: string;
+
+    @ApiProperty()
+    readonly level_edu: number;
 }

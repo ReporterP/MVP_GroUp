@@ -3,7 +3,7 @@ import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 
-@Controller('users')
+@Controller('api/users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
@@ -17,9 +17,14 @@ export class UsersController {
     return this.usersService.findOne(+id);
   }
 
-  @Get('resume/:id')
+  @Get('resume_user_for_admin/:user_id')
   findOneUserForResume(@Param('id') id: string) {
     return this.usersService.findOneUserForResume(+id);
+  }
+
+  @Get('roadmap/:user_id')
+  getUserRoadmap(@Param('user_id') id: string) {
+    return this.usersService.getUserRoadmap(+id);
   }
 
   @Get('posts/:id')

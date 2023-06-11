@@ -1,4 +1,9 @@
+import { ApiProperty } from '@nestjs/swagger';
+
 export class CreateTagsPostDto {
-    readonly tag;
-    readonly color;
+    @ApiProperty()
+    readonly tag: string;
+
+    @ApiProperty()
+    readonly color: string;
 }

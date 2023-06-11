@@ -40,7 +40,12 @@ const ViewPost = props => {
               </div>
               <p>{props.text}</p>
               <div className='viewCardButtons'>
-                <button className='viewCheck' onClick={props.funcLike}>{props.isLike}</button>
+                <button className='viewCheck' onClick={()=> {              
+                    // eslint-disable-next-line no-undef
+                    props.isLike === "Записан"?ym(93896111,'reachGoal','click-dislike-in-view-post'):ym(93896111,'reachGoal','click-like-in-view-post')
+                    props.funcLike()
+                  }
+                  }>{props.isLike}</button>
               </div>
             </div>
           </div>

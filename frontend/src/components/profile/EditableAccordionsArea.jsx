@@ -43,8 +43,15 @@ const EditableAccordionsArea = props => {
         <div className='accordionsTitle' style={{ color: color }}>
           {title}
           {mode ?
-          <img src={TickIcon } alt='кнопка редактирования' onClick={() => { sendAccord(); setMode(!mode) }} />:
-          <img src={EditButtonIcon} alt='кнопка редактирования' onClick={() => { setMode(!mode) }} />}
+          <img src={TickIcon } alt='кнопка редактирования' onClick={() => {
+            // eslint-disable-next-line no-undef
+            typeArea==="hard"?ym(93896111,'reachGoal','click-safe-hard-skills'):ym(93896111,'reachGoal','click-safe-soft-skills');
+            sendAccord(); setMode(!mode) 
+          }} />:
+          <img src={EditButtonIcon} alt='кнопка редактирования' onClick={() => {
+            // eslint-disable-next-line no-undef
+            typeArea==="hard"?ym(93896111,'reachGoal','click-edit-hard-slills'):ym(93896111,'reachGoal','click-edit-soft-slills');
+            setMode(!mode) }} />}
         </div>
 
         <EditableAccordions typeArea={typeArea} color={color} setNewAccord={setaccordsState} accordsState={accordsState} deleteAccordElem={deleteAccordElem}/>

@@ -12,6 +12,8 @@ const Footer = props => {
   const [link, setlink] = useState("post")
 
   var post = () => {
+    // eslint-disable-next-line no-undef
+    ym(93896111,'reachGoal','click-open-all-posts')
     props.post(true)
     props.profile(false)
     setrefresh(true)
@@ -19,6 +21,8 @@ const Footer = props => {
   }
 
   var profile = () => {
+    // eslint-disable-next-line no-undef
+    ym(93896111,'reachGoal','click-open-my-profile')
     props.post(false)
     props.profile(true)
     setrefresh(true)

@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { ResumeHardService } from './resume_hard.service';
 import { CreateResumeHardDto } from './dto/create-resume_hard.dto';
 
-@Controller('resume-hard')
+@Controller('api/resume-hard')
 export class ResumeHardController {
   constructor(private readonly resumeHardService: ResumeHardService) {}
 

@@ -57,14 +57,13 @@ export class SpecialtiesService {
   async updateSpecUser(user_id: number, updateSpecialtyDto : UpdateSpecialtyDto) {
     const user = await this.usersService.findOneUserForResume(user_id);
     const newSpec: string = updateSpecialtyDto.name
-    const oldSpec: string = user.specialties_id[0].name
     
-    if (newSpec === '') {
-      user.$remove('specialties_id', await this.findOneByName(oldSpec));
-
-    } else if (newSpec !== oldSpec) {
-      user.$remove('specialties_id', await this.findOneByName(oldSpec));
-      
+    const oldSpec = user?.specialties_id[0]?.name
+    
+    if (newSpec !== oldSpec) {
+      if (oldSpec !== undefined) {
+        user.$remove('specialties_id', await this.findOneByName(oldSpec));
+      }
       user.$add('specialties_id', await this.findOneByName(newSpec)?
       await this.findOneByName(newSpec)
       :await this.SpecialtiesRepo.create({"name": newSpec}));

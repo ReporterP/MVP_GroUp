@@ -13,7 +13,10 @@ const Personal = () => {
     <div className='personal'>
       <div className='flex flexSpaceBetween flexItemsCenter'>
         <h6>Интересы</h6>
-        <img src={EditButton} alt='edit button' onClick={()=>{setTagsPopupOpened(true)}} />
+        <img src={EditButton} alt='edit button' onClick={()=>{
+          // eslint-disable-next-line no-undef
+          ym(93896111,'reachGoal','click-edit-button-hobby');
+          setTagsPopupOpened(true)}} />
       </div>
       <ProfileTags update={tagsPopupOpened}/>
       {/* <h6>Роадмап</h6> */}

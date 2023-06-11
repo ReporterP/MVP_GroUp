@@ -13,6 +13,8 @@ const TagMenuItem = props => {
                 <span style={{backgroundColor: infoTag.color}}> {infoTag.tag} </span>
                 <div className='tagEditTools'>
                     <div onClick={() => {
+                        // eslint-disable-next-line no-undef
+                        ym(93896111,'reachGoal','click-delete-hobby')
                         props.Tags.splice(props.Tags.indexOf(infoTag), 1)
                         props.setTags(props.Tags)
                         setdeleteStyle(true)

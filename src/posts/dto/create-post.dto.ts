@@ -1,8 +1,21 @@
+import { ApiProperty } from '@nestjs/swagger';
+
 export class CreatePostDto {
-    readonly type;
-    readonly title;
-    readonly text;
-    readonly picture;
+    @ApiProperty()
+    readonly type: string;
+
+    @ApiProperty()
+    readonly title: string;
+
+    @ApiProperty()
+    readonly text: string;
+
+    @ApiProperty()
+    readonly picture: any;
+
+    @ApiProperty()
     readonly user_id;
-    readonly tags;
+
+    @ApiProperty()
+    readonly tags: Array<string>;
 }

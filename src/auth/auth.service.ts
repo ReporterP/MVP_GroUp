@@ -4,7 +4,7 @@ import { AuthCreateUserDto } from './dto/AuthCreateUserDto';
 
 @Injectable()
 export class AuthService {
-    constructor(@Inject(UsersService) private usersService: UsersService) {}
+    constructor(@Inject(UsersService) private usersService: UsersService) {} 
 
     async create(authCreateUserDto: AuthCreateUserDto) {
         const authUser = await this.usersService.create(authCreateUserDto)
@@ -16,6 +16,7 @@ export class AuthService {
             return "enter_in_browser" 
         } else {
             const oneUser = await this.usersService.findOne(telegram_id)
+            console.log(oneUser)
             return oneUser == null? "err" : oneUser
         }
     }
